@@ -1,0 +1,27 @@
+---
+version: "2.1"
+services:
+  heimdall:
+    image: lscr.io/linuxserver/heimdall
+    container_name: heimdall
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - ./heimdall/config:/config
+    ports:
+      - 8090:80
+      - 8443:443
+    restart: unless-stopped
+  viewtube:
+    container_name: viewtube
+    restart: unless-stopped
+    image: mauriceo/viewtube:dev
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - .viewtube/data:/data
+    environment:
+      - VIEWTUBE_API_URL=https://api.viewtube.io/
+    ports:
+      - 8066:8066
