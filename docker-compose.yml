@@ -14,14 +14,25 @@ services:
       - 8090:80
       - 8443:443
     restart: unless-stopped
-  viewtube:
-    container_name: viewtube
-    restart: unless-stopped
-    image: mauriceo/viewtube:dev
+  firefly3:
+    image: fireflyiii/core:latest
+    restart: always
     volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - .viewtube/data:/data
-    environment:
-      - VIEWTUBE_API_URL=https://api.viewtube.io/
+      - firefly_iii_upload:/var/www/html/storage/upload
+    env_file: ./firefly3/.env
     ports:
-      - 8066:8066
+      - 9090:8080
+    depends_on:
+      - db
+  db:
+    image: arm32v7/postgres
+    hostname: fireflyiiidb
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=fireflypi4
+      - POSTGRES_USER=firefly
+    volumes:
+      - firefly_iii_db:/var/lib/postgresql/data
+volumes:
+   firefly_iii_upload:
+   firefly_iii_db:
