@@ -5,10 +5,16 @@ upstream:
 blocking:
   blackLists:
     ads:
-      - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
       - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
+      - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+      - https://mirror1.malwaredomains.com/files/justdomains
+      - http://sysctl.org/cameleon/hosts
+      - https://zeustracker.abuse.ch/blocklist.php?download=domainblocklist
+      - https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
   clientGroupsBlock:
     default:
       - ads
+prometheus:
+  enable: true
 port: 53
 httpPort: 4000
