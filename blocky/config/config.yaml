@@ -1,0 +1,14 @@
+upstream:
+  default:
+    - 1.1.1.1
+    - https://dns.digitale-gesellschaft.ch/dns-query
+blocking:
+  blackLists:
+    ads:
+      - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+      - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
+  clientGroupsBlock:
+    default:
+      - ads
+port: 53
+httpPort: 4000
