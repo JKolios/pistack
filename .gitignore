@@ -1,3 +1,4 @@
 heimdall/config/**
 podgrab/config/**
 podgrab/data/**
+**/log
