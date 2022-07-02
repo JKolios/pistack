@@ -66,3 +66,7 @@ services:
       - GF_PANELS_DISABLE_SANITIZE_HTML=true
       - GF_INSTALL_PLUGINS=grafana-piechart-panel
     restart: always
+
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
