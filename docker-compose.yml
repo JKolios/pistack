@@ -38,20 +38,20 @@ services:
     volumes:
       # config file
       - ./blocky/config/config.yml:/app/config.yml
-    prometheus:
-      image: prom/prometheus
-      container_name: prometheus
-      volumes:
-        - ./prometheus/:/etc/prometheus/
-        - prometheus_data:/prometheus
-      command:
-        - '--config.file=/etc/prometheus/prometheus.yml'
-        - '--storage.tsdb.path=/prometheus'
-        - '--web.console.libraries=/usr/share/prometheus/console_libraries'
-        - '--web.console.templates=/usr/share/prometheus/consoles'
-      ports:
-        - 9090:9090
-      restart: always
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - 9090:9090
+    restart: always
   grafana:
     image: grafana/grafana:6.7.1
     container_name: grafana
@@ -65,4 +65,4 @@ services:
     environment:
       - GF_PANELS_DISABLE_SANITIZE_HTML=true
       - GF_INSTALL_PLUGINS=grafana-piechart-panel
-    restart: always  
+    restart: always
