@@ -20,7 +20,7 @@ services:
     environment:
       - CHECK_FREQUENCY=240
     volumes:
-      - ./podgrab/config:/config
+      - podgrab_config:/config
       - podgrab_data:/assets
     ports:
       - 8080:8080
@@ -84,6 +84,7 @@ services:
 
 volumes:
   heimdall_config: {}
+  podgrab_config: {}
   podgrab_data: {}
   prometheus_data: {}
   grafana_data: {}
