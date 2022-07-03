@@ -9,7 +9,7 @@ services:
       - PGID=1000
       - TZ=Europe/London
     volumes:
-      - ./heimdall/config:/config
+      - heimdall_config:/config
     ports:
       - 8090:80
       - 8443:443
@@ -21,7 +21,7 @@ services:
       - CHECK_FREQUENCY=240
     volumes:
       - ./podgrab/config:/config
-      - ./podgrab/data:/assets
+      - podgrab_data:/assets
     ports:
       - 8080:8080
     restart: unless-stopped
@@ -68,5 +68,7 @@ services:
     restart: always
 
 volumes:
+  heimdall_config: {}
+  podgrab_data: {}
   prometheus_data: {}
   grafana_data: {}
