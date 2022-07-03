@@ -77,7 +77,7 @@ services:
       - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
     volumes:
       - calibre-web_config:/config
-      - /mnt/books/Calibre\ Library:/books
+      - "/mnt/books/Calibre Library":/books
     ports:
       - 8083:8083
     restart: unless-stopped
