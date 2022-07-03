@@ -15,10 +15,10 @@ jobs:
     runs-on: [self-hosted, linux, ARM64]
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: docker-compose down
         run: docker-compose down --remove-orphans || true
         
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
       - name: docker-compose validate
