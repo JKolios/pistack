@@ -1,6 +1,6 @@
-# Runs docker-compose down and up on each commit to main
+# Deploys containers using docker-compose
 
-name: CI
+name: Docker-compose deployment
 
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
@@ -17,9 +17,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      
+      - name: docker-compose validate
+        run: docker-compose config -q
 
-      - name: Run a one-line script
+      - name: docker-compose down
         run: docker-compose down --remove-orphans 
 
-      - name: Run a one-line script
+      - name: docker-compose up
         run: docker-compose up -d --quiet-pull
