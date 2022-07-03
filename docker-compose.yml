@@ -66,9 +66,25 @@ services:
       - GF_PANELS_DISABLE_SANITIZE_HTML=true
       - GF_INSTALL_PLUGINS=grafana-piechart-panel
     restart: always
+  calibre-web:
+    image: lscr.io/linuxserver/calibre-web:latest
+    container_name: calibre-web
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Athens
+      - DOCKER_MODS=linuxserver/calibre-web:calibre #optional
+      - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
+    volumes:
+      - calibre-web_config:/config
+      - /mnt/books/Calibre\ Library:/books
+    ports:
+      - 8083:8083
+    restart: unless-stopped
 
 volumes:
   heimdall_config: {}
   podgrab_data: {}
   prometheus_data: {}
   grafana_data: {}
+  calibre-web_config: {}
