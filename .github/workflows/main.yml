@@ -17,6 +17,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+        with:
+          clean: false
       
       - name: docker-compose validate
         run: docker-compose config -q
