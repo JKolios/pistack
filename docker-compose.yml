@@ -81,6 +81,16 @@ services:
     ports:
       - 8083:8083
     restart: unless-stopped
+  feedpushr:
+    image: ncarlier/feedpushr:latest
+    container_name: feedpushr
+    environment:
+      - FP_DB="boltdb:///var/opt/feedpushr.db"
+    volumes:
+      - feedpushr_db:/var/opt
+    ports:
+      - 8081:8080
+    restart: unless-stopped
 
 volumes:
   heimdall_config: {}
@@ -89,3 +99,4 @@ volumes:
   prometheus_data: {}
   grafana_data: {}
   calibre-web_config: {}
+  feedpushr_db: {}
