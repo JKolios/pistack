@@ -11,9 +11,10 @@ blocking:
       - http://sysctl.org/cameleon/hosts
       - https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
     timewasters:
-      - reddit.com
-      - iefimerida.gr
-      - news247.gr
+      - | 
+        /reddit.com/
+        /iefimerida.gr/
+        /news247.gr/
   clientGroupsBlock:
     default:
       - ads
