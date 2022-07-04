@@ -1,0 +1,3 @@
+CREATE USER readflow;
+CREATE DATABASE readflow;
+GRANT ALL PRIVILEGES ON DATABASE readflow TO readflow;

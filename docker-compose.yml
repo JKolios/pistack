@@ -13,6 +13,7 @@ services:
       - '5432:5432'
     volumes: 
       - pg_data:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d/
     
   heimdall:
     image: lscr.io/linuxserver/heimdall

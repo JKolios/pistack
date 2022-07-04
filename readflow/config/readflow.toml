@@ -10,7 +10,7 @@
 [global]
 ## Database connection string
 # Default: "postgres://postgres:testpwd@localhost/readflow_test?sslmode=disable"
-db = "postgres://postgres:postgres@postgres/readflow?sslmode=disable"
+db = "postgres://readflow:readflow@postgres/readflow?sslmode=disable"
 
 ## HTTP listen address
 # Default: ":8080"
