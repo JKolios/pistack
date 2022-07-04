@@ -85,7 +85,7 @@ services:
     image: ncarlier/feedpushr:latest
     container_name: feedpushr
     environment:
-      - FP_DB="boltdb:///var/opt/feedpushr.db"
+      - FP_DB=boltdb:///var/opt/feedpushr.db
     volumes:
       - feedpushr_db:/var/opt
     ports:
