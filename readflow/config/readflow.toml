@@ -1,0 +1,48 @@
+# readflow configuration file
+#
+# If an attribute has a default value, this value is used if the attribute is not
+# set or empty.
+#
+# Environment variables can be used anywhere in this config file, simply surround
+# them with ${}. For strings the variable must be within quotes (ie, "${STR_VAR}"),
+# for numbers and booleans they should be plain (ie, ${INT_VAR}, ${BOOL_VAR})
+
+[global]
+## Database connection string
+# Default: "postgres://postgres:testpwd@localhost/readflow_test?sslmode=disable"
+db = "postgres://postgres:postgres@postgres/readflow?sslmode=disable"
+
+## HTTP listen address
+# Default: ":8080"
+# Examples: "localhost:8080" or ":8080" for all interfaces 
+listen_addr = ":8080"
+
+## Metrics listen address (aka: Prometheus metrics endpoint), deactivated if empty
+# Example: ":9090"
+metrics_listen_addr = ":9090"
+
+## Authentication method
+# - `mock`: Generic user use for testing
+# - `proxy`: For proxied authentication that use "X-WEBAUTH-USER", "X-Auth-Username", "Remote-User" or "Remote-Name" HTTP header as username
+#            Note: Set 'REACT_APP_AUTHORITY=mock' when bulding UI
+# - `https://...`: Use OpenID Connect provider
+# Default: "https://login.nunux.org/auth/realms/readflow"
+authn = "mock"
+
+## Secret salt used by hash algorythms
+# Default: "pepper"
+secret_salt = "saltymcsalterson"
+
+[integration]
+
+## Rate limiting for notifications, none by default
+#[rate_limiting.notification]
+#provider = "memory"
+#tokens = 5
+#interval = "24h"
+
+## Rate limiting for incoming webhooks, none by default
+#[rate_limiting.webhook]
+#provider = "memory"
+#tokens = 30
+#interval = "1m"
