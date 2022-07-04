@@ -21,14 +21,6 @@ listen_addr = ":8080"
 # Example: ":9090"
 metrics_listen_addr = ":9090"
 
-## Authentication method
-# - `mock`: Generic user use for testing
-# - `proxy`: For proxied authentication that use "X-WEBAUTH-USER", "X-Auth-Username", "Remote-User" or "Remote-Name" HTTP header as username
-#            Note: Set 'REACT_APP_AUTHORITY=mock' when bulding UI
-# - `https://...`: Use OpenID Connect provider
-# Default: "https://login.nunux.org/auth/realms/readflow"
-authn = "mock"
-
 ## Secret salt used by hash algorythms
 # Default: "pepper"
 secret_salt = "saltymcsalterson"
