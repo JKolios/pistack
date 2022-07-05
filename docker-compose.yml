@@ -10,7 +10,7 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - '5432:5432'
-    volumes: 
+    volumes:
       - pg_data:/var/lib/postgresql/data
       - ./postgres/init:/docker-entrypoint-initdb.d/
 
@@ -28,7 +28,7 @@ services:
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    
+
   heimdall:
     image: lscr.io/linuxserver/heimdall
     container_name: heimdall
@@ -43,10 +43,8 @@ services:
       - 8443:443
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.heimdall.rule=PathPrefix(`/heimdall`)"
+      - "traefik.http.routers.heimdall.rule=Host(`heimdall.pistack.local`)"
       - "traefik.http.routers.heimdall.entrypoints=web"
-      - "traefik.http.middlewares.heimdall-stripprefix.stripprefix.prefixes=/heimdall"
-      - "traefik.http.routers.heimdall.middlewares=heimdall-stripprefix"
     restart: unless-stopped
 
   podgrab:
@@ -61,10 +59,8 @@ services:
       - 8081:8080
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.podgrab.rule=PathPrefix(`/podgrab`)"
+      - "traefik.http.routers.podgrab.rule=Host(`podgrab.pistack.local`)"
       - "traefik.http.routers.podgrab.entrypoints=web"
-      - "traefik.http.middlewares.podgrab-stripprefix.stripprefix.prefixes=/podgrab"
-      - "traefik.http.routers.podgrab.middlewares=podgrab-stripprefix"
     restart: unless-stopped
 
   blocky:
@@ -80,6 +76,10 @@ services:
     volumes:
       # config file
       - ./blocky/config/config.yml:/app/config.yml
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.blocky.rule=Host(`blocky.pistack.local`)"
+      - "traefik.http.routers.blocky.entrypoints=web"
 
   prometheus:
     image: prom/prometheus
@@ -95,6 +95,10 @@ services:
     ports:
       - 9090:9090
     restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prometheus.rule=Host(`prometheus.pistack.local`)"
+      - "traefik.http.routers.prometheus.entrypoints=web"
 
   grafana:
     image: grafana/grafana:6.7.1
@@ -110,6 +114,10 @@ services:
       - GF_PANELS_DISABLE_SANITIZE_HTML=true
       - GF_INSTALL_PLUGINS=grafana-piechart-panel
     restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.pistack.local`)"
+      - "traefik.http.routers.grafana.entrypoints=web"
 
   calibre-web:
     image: lscr.io/linuxserver/calibre-web:latest
@@ -126,6 +134,10 @@ services:
     ports:
       - 8082:8083
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.calibre-web.rule=Host(`calibre-web.pistack.local`)"
+      - "traefik.http.routers.calibre-web.entrypoints=web"
 
   feedpushr:
     image: ncarlier/feedpushr:latest
@@ -137,6 +149,10 @@ services:
     ports:
       - 8083:8080
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.feedpushr.rule=Host(`feedpushr.pistack.local`)"
+      - "traefik.http.routers.feedpushr.entrypoints=web"
 
   readflow:
     image: ncarlier/readflow:edge
@@ -148,6 +164,10 @@ services:
     ports:
       - 8084:8080
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.readflow.rule=Host(`readflow.pistack.local`)"
+      - "traefik.http.routers.readflow.entrypoints=web"
 
 volumes:
   heimdall_config: {}
