@@ -41,7 +41,7 @@ services:
       - 8090:80
       - 8443:443
     labels:
-      - traefik.http.routers.my-container.rule=PathPrefix(`/heimdall/`)
+      - traefik.http.routers.heimdall.rule=PathPrefix(`/heimdall/`)
     restart: unless-stopped
 
   podgrab:
