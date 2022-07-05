@@ -18,6 +18,7 @@ services:
     image: "traefik:v2.7"
     container_name: "traefik"
     command:
+      - "--log.level=DEBUG"
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
@@ -41,7 +42,9 @@ services:
       - 8090:80
       - 8443:443
     labels:
-      - traefik.http.routers.heimdall.rule=PathPrefix(`/heimdall/`)
+      - "traefik.enable=true"
+      - "traefik.http.routers.heimdall.rule=PathPrefix(`/heimdall/`)"
+      - "traefik.http.routers.heimdall.entrypoints=web"
     restart: unless-stopped
 
   podgrab:
