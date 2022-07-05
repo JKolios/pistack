@@ -15,7 +15,7 @@ services:
       - ./postgres/init:/docker-entrypoint-initdb.d/
 
   traefik:
-    image: "traefik:v2.7"
+    image: "traefik:v2.8"
     container_name: "traefik"
     command:
       - "--log.level=DEBUG"
@@ -45,7 +45,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.heimdall.rule=PathPrefix(`/heimdall`)"
       - "traefik.http.routers.heimdall.entrypoints=web"
-      - "traefik.http.middlewares.heimdall.stripprefix.prefixes=/heimdall"
+      - "traefik.http.middlewares.heimdall-strip.stripprefix.prefixes=/heimdall"
     restart: unless-stopped
 
   podgrab:
@@ -62,7 +62,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.podgrab.rule=PathPrefix(`/podgrab`)"
       - "traefik.http.routers.podgrab.entrypoints=web"
-      - "traefik.http.middlewares.podgrab.stripprefix.prefixes=/podgrab"
+      - "traefik.http.middlewares.podgrab-strip.stripprefix.prefixes=/podgrab"
     restart: unless-stopped
 
   blocky:
