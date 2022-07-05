@@ -23,3 +23,14 @@ prometheus:
   enable: true
 port: 53
 httpPort: 4000
+
+# optional: custom IP address(es) for domain name (with all sub-domains). Multiple addresses must be separated by a comma
+# example: query "printer.lan" or "my.printer.lan" will return 192.168.178.3
+customDNS:
+  customTTL: 1h
+  # optional: if true (default), return empty result for unmapped query types (for example TXT, MX or AAAA if only IPv4 address is defined).
+  # if false, queries with unmapped types will be forwarded to the upstream resolver
+  filterUnmappedTypes: true
+  # optional: replace domain in the query with other domain before resolver lookup in the mapping
+  mapping:
+    pistack.local: 192.168.1.103
