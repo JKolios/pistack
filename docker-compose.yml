@@ -163,6 +163,7 @@ services:
 
   wallabag:
     image: wallabag/wallabag
+    container_name: wallabag
     environment:
       - POSTGRES_PASSWORD=wallabag
       - POSTGRES_USER=wallabag
