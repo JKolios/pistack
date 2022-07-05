@@ -57,6 +57,10 @@ services:
       - podgrab_data:/assets
     ports:
       - 8081:8080
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.podgrab.rule=PathPrefix(`/podgrab/`)"
+      - "traefik.http.routers.podgrab.entrypoints=web"
     restart: unless-stopped
 
   blocky:
