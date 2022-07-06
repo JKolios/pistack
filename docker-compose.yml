@@ -14,13 +14,6 @@ services:
       - pg_data:/var/lib/postgresql/data
       - ./postgres/init:/docker-entrypoint-initdb.d/
 
-  redis:
-    image: redis:alpine
-    healthcheck:
-      test: [ "CMD", "redis-cli", "ping" ]
-      interval: 20s
-      timeout: 3s
-
   traefik:
     image: "traefik:v2.8"
     container_name: "traefik"
@@ -193,7 +186,6 @@ services:
       timeout: 3s
     depends_on:
       - postgres
-      - redis
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.wallabag.rule=Host(`wallabag.pistack.local`)"
