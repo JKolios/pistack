@@ -157,6 +157,69 @@ services:
       - "traefik.http.routers.feedpushr.rule=Host(`ttrss.pistack.local`)"
       - "traefik.http.routers.feedpushr.entrypoints=web"
 
+  app:
+    image: cthulhoo/ttrss-fpm-pgsql-static
+    restart: unless-stopped
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_ENV_USER=postgres
+      - DB_ENV_PASS=postgres
+      - DB_TYPE=pgsql
+      - SELF_URL_PATH=ttrss.pistack.local
+      - HTTP_PORT=127.0.0.1:8280
+    volumes:
+      - ttrss_app:/var/www/html
+    depends_on:
+      - postgres
+
+  backups:
+    image: cthulhoo/ttrss-fpm-pgsql-static
+    restart: unless-stopped
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_ENV_USER=postgres
+      - DB_ENV_PASS=postgres
+      - DB_TYPE=pgsql
+      - SELF_URL_PATH=ttrss.pistack.local
+    volumes:
+      - ttrss_backups:/backups
+      - ttrss_app:/var/www/html
+    depends_on:
+      - postgres
+    command: /opt/tt-rss/dcron.sh -f
+
+  updater:
+    image: cthulhoo/ttrss-fpm-pgsql-static
+    restart: unless-stopped
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_ENV_USER=postgres
+      - DB_ENV_PASS=postgres
+      - DB_TYPE=pgsql
+      - SELF_URL_PATH=ttrss.pistack.local
+    volumes:
+      - ttrss_app:/var/www/html
+    depends_on:
+      - app
+    command: /opt/tt-rss/updater.sh
+
+  web-nginx:
+    image: cthulhoo/ttrss-web-nginx
+    restart: unless-stopped
+    ports:
+      - 8084:80
+    volumes:
+      -  ttrss_app:/var/www/html:ro
+    depends_on:
+      - app
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.feedpushr.rule=Host(`ttrss.pistack.local`)"
+      - "traefik.http.routers.feedpushr.entrypoints=web"
+
 volumes:
   heimdall_config: {}
   podgrab_config: {}
@@ -164,6 +227,6 @@ volumes:
   prometheus_data: {}
   grafana_data: {}
   calibre-web_config: {}
-  feedpushr_db: {}
   pg_data: {}
-  wallabag_images: {}
+  ttrss_app:
+  ttrss_backups:
