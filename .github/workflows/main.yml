@@ -25,4 +25,4 @@ jobs:
         run: docker-compose config -q
 
       - name: docker-compose up
-        run: docker-compose up -d --quiet-pull
+        run: docker-compose up -d --quiet-pull --build

@@ -140,7 +140,9 @@ services:
       - "traefik.http.routers.calibre-web.entrypoints=web"
 
   app:
-    image: cthulhoo/ttrss-fpm-pgsql-static
+    build:
+      context:
+        ./ttrss/app
     restart: unless-stopped
     environment:
       - DB_HOST=postgres
@@ -156,7 +158,9 @@ services:
       - postgres
 
   backups:
-    image: cthulhoo/ttrss-fpm-pgsql-static
+    build:
+      context:
+        ./ttrss/app
     restart: unless-stopped
     environment:
       - DB_HOST=postgres
@@ -173,7 +177,9 @@ services:
     command: /opt/tt-rss/dcron.sh -f
 
   updater:
-    image: cthulhoo/ttrss-fpm-pgsql-static
+    build:
+      context:
+        ./ttrss/app
     restart: unless-stopped
     environment:
       - DB_HOST=postgres
@@ -189,7 +195,7 @@ services:
     command: /opt/tt-rss/updater.sh
 
   web-nginx:
-    image: cthulhoo/ttrss-web-nginx
+    build: ./ttrss/web-nginx
     restart: unless-stopped
     ports:
       - 8084:80
