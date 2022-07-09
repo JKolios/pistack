@@ -169,7 +169,7 @@ services:
       - SYMFONY__ENV__DOMAIN_NAME=http://wallabag.pistack.local
       - SYMFONY__ENV__SERVER_NAME="wallabag"
     ports:
-      - "80"
+      - 8084:80
     volumes:
       - wallabag_images:/var/www/wallabag/web/assets/images
     # healthcheck:
