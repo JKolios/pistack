@@ -167,23 +167,23 @@ services:
       - SYMFONY__ENV__DATABASE_USER=wallabag
       - SYMFONY__ENV__DATABASE_PASSWORD=wallabag
       - SYMFONY__ENV__DOMAIN_NAME=http://wallabag.pistack.local
-      - SYMFONY__ENV__SERVER_NAME="Wallabag"
+      - SYMFONY__ENV__SERVER_NAME="wallabag"
     ports:
       - "80"
     volumes:
       - wallabag_images:/var/www/wallabag/web/assets/images
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "wget",
-          "--no-verbose",
-          "--tries=1",
-          "--spider",
-          "http://localhost"
-        ]
-      interval: 1m
-      timeout: 3s
+    # healthcheck:
+    #   test:
+    #     [
+    #       "CMD",
+    #       "wget",
+    #       "--no-verbose",
+    #       "--tries=1",
+    #       "--spider",
+    #       "http://localhost"
+    #     ]
+    #   interval: 1m
+    #   timeout: 3s
     depends_on:
       - postgres
     labels:
