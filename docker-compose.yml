@@ -139,24 +139,6 @@ services:
       - "traefik.http.routers.calibre-web.rule=Host(`calibre-web.pistack.local`)"
       - "traefik.http.routers.calibre-web.entrypoints=web"
 
-  ttrss:
-    image: clue/ttrss:latest
-    container_name: ttrss
-    environment:
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_ENV_USER=postgres
-      - DB_ENV_PASS=postgres
-      - DB_TYPE=pgsql
-      - SELF_URL_PATH=ttrss.pistack.local
-    ports:
-      - 8084:8080
-    restart: unless-stopped
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.feedpushr.rule=Host(`ttrss.pistack.local`)"
-      - "traefik.http.routers.feedpushr.entrypoints=web"
-
   app:
     image: cthulhoo/ttrss-fpm-pgsql-static
     restart: unless-stopped
