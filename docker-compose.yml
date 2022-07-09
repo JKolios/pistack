@@ -144,14 +144,8 @@ services:
       context:
         ./ttrss/app
     restart: unless-stopped
-    environment:
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_ENV_USER=postgres
-      - DB_ENV_PASS=postgres
-      - DB_TYPE=pgsql
-      - SELF_URL_PATH=ttrss.pistack.local
-      - HTTP_PORT=127.0.0.1:8280
+    env_file:
+      - ./ttrss/.env
     volumes:
       - ttrss_app:/var/www/html
     depends_on:
@@ -162,13 +156,8 @@ services:
       context:
         ./ttrss/app
     restart: unless-stopped
-    environment:
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_ENV_USER=postgres
-      - DB_ENV_PASS=postgres
-      - DB_TYPE=pgsql
-      - SELF_URL_PATH=ttrss.pistack.local
+    env_file:
+      - ./ttrss/.env
     volumes:
       - ttrss_backups:/backups
       - ttrss_app:/var/www/html
@@ -181,13 +170,8 @@ services:
       context:
         ./ttrss/app
     restart: unless-stopped
-    environment:
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_ENV_USER=postgres
-      - DB_ENV_PASS=postgres
-      - DB_TYPE=pgsql
-      - SELF_URL_PATH=ttrss.pistack.local
+    env_file:
+      - ./ttrss/.env
     volumes:
       - ttrss_app:/var/www/html
     depends_on:
@@ -216,5 +200,5 @@ volumes:
   grafana_data: {}
   calibre-web_config: {}
   pg_data: {}
-  ttrss_app:
-  ttrss_backups:
+  ttrss_app: {}
+  ttrss_backups: {}
