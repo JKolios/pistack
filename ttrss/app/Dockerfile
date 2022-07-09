@@ -64,4 +64,6 @@ ENV TTRSS_MYSQL_CHARSET="UTF8"
 ENV TTRSS_PHP_EXECUTABLE="/usr/bin/php8"
 ENV TTRSS_PLUGINS="auth_internal, note, nginx_xaccel"
 
+RUN chmod +x ${SCRIPT_ROOT}/* 
+
 CMD ${SCRIPT_ROOT}/startup.sh
