@@ -139,57 +139,23 @@ services:
       - "traefik.http.routers.calibre-web.rule=Host(`calibre-web.pistack.local`)"
       - "traefik.http.routers.calibre-web.entrypoints=web"
 
-  feedpushr:
-    image: ncarlier/feedpushr:latest
-    container_name: feedpushr
+  ttrss:
+    image: clue/ttrss:latest
+    container_name: ttrss
     environment:
-      - FP_DB=boltdb:///var/opt/feedpushr.db
-    volumes:
-      - feedpushr_db:/var/opt
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_ENV_USER=postgres
+      - DB_ENV_PASS=postgres
+      - DB_TYPE=pgsql
+      - SELF_URL_PATH=ttrss.pistack.local
     ports:
-      - 8083:8080
+      - 8084:8080
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.feedpushr.rule=Host(`feedpushr.pistack.local`)"
+      - "traefik.http.routers.feedpushr.rule=Host(`ttrss.pistack.local`)"
       - "traefik.http.routers.feedpushr.entrypoints=web"
-
-  wallabag:
-    image: wallabag/wallabag
-    container_name: wallabag
-    environment:
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_USER=postgres
-      - SYMFONY__ENV__DATABASE_DRIVER=pdo_pgsql
-      - SYMFONY__ENV__DATABASE_HOST=postgres
-      - SYMFONY__ENV__DATABASE_PORT=5432
-      - SYMFONY__ENV__DATABASE_NAME=wallabag
-      - SYMFONY__ENV__DATABASE_USER=wallabag
-      - SYMFONY__ENV__DATABASE_PASSWORD=wallabag
-      - SYMFONY__ENV__DOMAIN_NAME=http://wallabag.pistack.local
-      - SYMFONY__ENV__SERVER_NAME="wallabag"
-    ports:
-      - 8084:80
-    volumes:
-      - wallabag_images:/var/www/wallabag/web/assets/images
-    # healthcheck:
-    #   test:
-    #     [
-    #       "CMD",
-    #       "wget",
-    #       "--no-verbose",
-    #       "--tries=1",
-    #       "--spider",
-    #       "http://localhost"
-    #     ]
-    #   interval: 1m
-    #   timeout: 3s
-    depends_on:
-      - postgres
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.wallabag.rule=Host(`wallabag.pistack.local`)"
-      - "traefik.http.routers.wallabag.entrypoints=web"
 
 volumes:
   heimdall_config: {}

@@ -1,4 +1,0 @@
-CREATE USER wallabag;
-ALTER USER wallabag WITH PASSWORD 'wallabag';
-CREATE DATABASE wallabag;
-GRANT ALL PRIVILEGES ON DATABASE wallabag TO wallabag;
