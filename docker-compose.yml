@@ -114,6 +114,9 @@ services:
     environment:
       - GF_PANELS_DISABLE_SANITIZE_HTML=true
       - GF_INSTALL_PLUGINS=grafana-piechart-panel
+      - GF_SECURITY_ADMIN_PASSWORD=password
+      - GF_SECURITY_ADMIN_USER=“admin”
+
     restart: always
     labels:
       - "traefik.enable=true"
