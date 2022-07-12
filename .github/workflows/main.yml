@@ -23,7 +23,8 @@ jobs:
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-        path: ${{ env.checkout_path }}
+        with:
+          path: ${{ env.checkout_path }}
 
       - name: docker-compose validate
         run: docker-compose config -q
