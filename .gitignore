@@ -1,4 +1,11 @@
 heimdall/config/**
 podgrab/config/**
 podgrab/data/**
+
 **/log
+**/.env
+
+.terraform
+*.tfstate.backup
+*.tfvars
+*.lock.hcl
