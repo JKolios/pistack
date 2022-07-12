@@ -21,12 +21,26 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - --certificatesresolvers.route53.acme.dnschallenge=true
+      - --certificatesresolvers.route53.acme.dnschallenge.provider=route53
+      - --certificatesresolvers.route53.acme.dnschallenge.delayBeforeCheck=0
+      - --certificatesresolvers.route53.acme.dnschallenge.resolvers=1.1.1.1:53
+      - --certificatesresolvers.route53.acme.email=${DOMAIN_EMAIL}
+      - --certificatesresolvers.route53.acme.storage=/certs/acme.json
       - "--metrics.prometheus=true"
+    environment:
+      - TZ
+      - AWS_ACCESS_KEY_ID
+      - AWS_REGION
+      - AWS_SECRET_ACCESS_KEY
     ports:
       - "80:80"
+      - "443:443"
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - certs:/certs
 
   heimdall:
     image: lscr.io/linuxserver/heimdall
@@ -34,13 +48,14 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/Athens
+      - TZ=${TZ}
     volumes:
       - heimdall_config:/config
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.heimdall.rule=Host(`heimdall.pistack.jkolios.xyz`)"
-      - "traefik.http.routers.heimdall.entrypoints=web"
+      - "traefik.http.routers.whoami.entrypoints=websecure"
+      - "traefik.http.routers.whoami.tls.certresolver=route53"
     restart: unless-stopped
 
   podgrab:
@@ -62,7 +77,7 @@ services:
     container_name: blocky
     restart: unless-stopped
     environment:
-      - TZ=Europe/Athens # Optional to synchronize the log timestamp with host
+      - TZ=${TZ} # Optional to synchronize the log timestamp with host
     volumes:
       # config file
       - ./blocky/config/config.yml:/app/config.yml
@@ -113,7 +128,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/Athens
+      - TZ=${TZ}
       - DOCKER_MODS=linuxserver/calibre-web:calibre #optional
       - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
     volumes:
@@ -129,8 +144,7 @@ services:
 
   app:
     build:
-      context:
-        ./ttrss/app
+      context: ./ttrss/app
     restart: unless-stopped
     env_file:
       - ./ttrss/.env
@@ -141,8 +155,7 @@ services:
 
   backups:
     build:
-      context:
-        ./ttrss/app
+      context: ./ttrss/app
     restart: unless-stopped
     env_file:
       - ./ttrss/.env
@@ -155,8 +168,7 @@ services:
 
   updater:
     build:
-      context:
-        ./ttrss/app
+      context: ./ttrss/app
     restart: unless-stopped
     env_file:
       - ./ttrss/.env
@@ -170,7 +182,7 @@ services:
     build: ./ttrss/web-nginx
     restart: unless-stopped
     volumes:
-      -  ttrss_app:/var/www/html:ro
+      - ttrss_app:/var/www/html:ro
     depends_on:
       - app
     labels:
@@ -188,3 +200,4 @@ volumes:
   pg_data: {}
   ttrss_app: {}
   ttrss_backups: {}
+  certs: {}
