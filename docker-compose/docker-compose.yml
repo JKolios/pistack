@@ -30,10 +30,10 @@ services:
       - --certificatesresolvers.route53.acme.storage=/certs/acme.json
       - "--metrics.prometheus=true"
     environment:
-      - TZ
-      - AWS_ACCESS_KEY_ID
-      - AWS_REGION
-      - AWS_SECRET_ACCESS_KEY
+      - TZ=${TZ}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_REGION=${AWS_REGION}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
     ports:
       - "80:80"
       - "443:443"
