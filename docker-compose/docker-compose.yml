@@ -41,7 +41,6 @@ services:
       - certs:/certs
     labels:
       - "traefik.http.routers.dashboard.rule=Host(`traefik.pistack.jkolios.xyz`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
-      - "traefik.http.routers.dashboard.service=api@internal"
       - "traefik.http.routers.dashboard.entrypoints=websecure"
       - "traefik.http.routers.dashboard.tls.certresolver=route53"
       - "traefik.http.routers.dashboard.middlewares=auth"
