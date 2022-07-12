@@ -34,6 +34,11 @@ jobs:
       - name: docker-compose up
         run: docker-compose up -d --quiet-pull --build
         working-directory: ${{ env.checkout_path }}/docker-compose
+        env:
+          TZ: ${{ secrets.TZ }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
   terraform:
     runs-on: ubuntu-latest
