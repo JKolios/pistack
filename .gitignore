@@ -3,7 +3,6 @@ podgrab/config/**
 podgrab/data/**
 
 **/log
-**/.env
 
 .terraform
 *.tfstate.backup
