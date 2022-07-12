@@ -5,7 +5,7 @@ name: Docker-compose deployment
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -34,33 +34,32 @@ jobs:
       - name: docker-compose up
         run: docker-compose up -d --quiet-pull --build
         working-directory: ${{ env.checkout_path }}/docker-compose
-  
+
   terraform:
-    name: "Terraform"
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v3
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-        - name: Setup Terraform
-          uses: hashicorp/setup-terraform@v1
-          with:
-            cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-        - name: Terraform Format
-          id: fmt
-          run: terraform fmt -check
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
 
-        - name: Terraform Init
-          id: init
-          run: terraform init
-        
-        - name: Terraform Validate
-          id: validate
-          run: terraform validate -no-color
+      - name: Terraform Init
+        id: init
+        run: terraform init
 
-        - name: Terraform Plan
-          run: terraform plan -no-color -input=false
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
 
-        - name: Terraform Apply
-          run: terraform apply -auto-approve -input=false
+      - name: Terraform Plan
+        run: terraform plan -no-color -input=false
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -input=false
