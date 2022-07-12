@@ -29,7 +29,7 @@ variable "common_tags" {
 }
 
 variable "pistack_ip" {
-    type        = string
-    default = ""  
-    description = "The IP of the Raspberry Pi"
+  type        = string
+  default     = ""
+  description = "The IP of the Raspberry Pi"
 }
