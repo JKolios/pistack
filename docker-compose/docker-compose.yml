@@ -39,7 +39,7 @@ services:
       - heimdall_config:/config
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.heimdall.rule=Host(`heimdall.pistack.local`)"
+      - "traefik.http.routers.heimdall.rule=Host(`heimdall.pistack.jkolios.xyz`)"
       - "traefik.http.routers.heimdall.entrypoints=web"
     restart: unless-stopped
 
@@ -53,7 +53,7 @@ services:
       - podgrab_data:/assets
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.podgrab.rule=Host(`podgrab.pistack.local`)"
+      - "traefik.http.routers.podgrab.rule=Host(`podgrab.pistack.jkolios.xyz`)"
       - "traefik.http.routers.podgrab.entrypoints=web"
     restart: unless-stopped
 
@@ -68,7 +68,7 @@ services:
       - ./blocky/config/config.yml:/app/config.yml
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.blocky.rule=Host(`blocky.pistack.local`)"
+      - "traefik.http.routers.blocky.rule=Host(`blocky.pistack.jkolios.xyz`)"
       - "traefik.http.routers.blocky.entrypoints=web"
 
   prometheus:
@@ -85,7 +85,7 @@ services:
     restart: always
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.prometheus.rule=Host(`prometheus.pistack.local`)"
+      - "traefik.http.routers.prometheus.rule=Host(`prometheus.pistack.jkolios.xyz`)"
       - "traefik.http.routers.prometheus.entrypoints=web"
 
   grafana:
@@ -104,7 +104,7 @@ services:
     restart: always
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.grafana.rule=Host(`grafana.pistack.local`)"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.pistack.jkolios.xyz`)"
       - "traefik.http.routers.grafana.entrypoints=web"
 
   calibre-web:
@@ -124,7 +124,7 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.calibre-web.rule=Host(`calibre-web.pistack.local`)"
+      - "traefik.http.routers.calibre-web.rule=Host(`calibre-web.pistack.jkolios.xyz`)"
       - "traefik.http.routers.calibre-web.entrypoints=web"
 
   app:
@@ -175,7 +175,7 @@ services:
       - app
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.feedpushr.rule=Host(`ttrss.pistack.local`)"
+      - "traefik.http.routers.feedpushr.rule=Host(`ttrss.pistack.jkolios.xyz`)"
       - "traefik.http.routers.feedpushr.entrypoints=web"
 
 volumes:
