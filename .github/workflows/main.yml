@@ -15,7 +15,7 @@ jobs:
     runs-on: [self-hosted, linux, ARM64]
     defaults:
       run:
-        working-directory: ./docker-compose
+        working-directory: docker-compose
 
     steps:
       - name: docker-compose down
