@@ -13,9 +13,6 @@ on:
 jobs:
   docker-compose-reup:
     runs-on: [self-hosted, linux, ARM64]
-    defaults:
-      run:
-        working-directory: docker-compose
 
     steps:
       - name: generate random dir name to checkout
@@ -28,9 +25,12 @@ jobs:
 
       - name: docker-compose validate
         run: docker-compose config -q
+        working-directory: ${{ env.checkout_path }}/docker-compose
 
       - name: docker-compose down
         run: docker-compose down --remove-orphans || true
+        working-directory: ${{ env.checkout_path }}/docker-compose
 
       - name: docker-compose up
         run: docker-compose up -d --quiet-pull --build
+        working-directory: ${{ env.checkout_path }}/docker-compose
