@@ -69,7 +69,8 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.podgrab.rule=Host(`podgrab.pistack.jkolios.xyz`)"
-      - "traefik.http.routers.podgrab.entrypoints=web"
+      - "traefik.http.routers.podgrab.entrypoints=websecure"
+      - "traefik.http.routers.podgrab.tls.certresolver=route53"
     restart: unless-stopped
 
   blocky:
@@ -88,7 +89,8 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.blocky.rule=Host(`blocky.pistack.jkolios.xyz`)"
-      - "traefik.http.routers.blocky.entrypoints=web"
+      - "traefik.http.routers.blocky.entrypoints=websecure"
+      - "traefik.http.routers.blocky.tls.certresolver=route53"
 
   prometheus:
     image: prom/prometheus
@@ -105,7 +107,8 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.prometheus.rule=Host(`prometheus.pistack.jkolios.xyz`)"
-      - "traefik.http.routers.prometheus.entrypoints=web"
+      - "traefik.http.routers.prometheus.entrypoints=websecure"
+      - "traefik.http.routers.prometheus.tls.certresolver=route53"
 
   grafana:
     image: grafana/grafana:6.7.1
@@ -124,7 +127,8 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.grafana.rule=Host(`grafana.pistack.jkolios.xyz`)"
-      - "traefik.http.routers.grafana.entrypoints=web"
+      - "traefik.http.routers.grafana.entrypoints=websecure"
+      - "traefik.http.routers.grafana.tls.certresolver=route53"
 
   calibre-web:
     image: lscr.io/linuxserver/calibre-web:latest
@@ -142,7 +146,8 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.calibre-web.rule=Host(`calibre-web.pistack.jkolios.xyz`)"
-      - "traefik.http.routers.calibre-web.entrypoints=web"
+      - "traefik.http.routers.calibre-web.entrypoints=websecure"
+      - "traefik.http.routers.calibre-web.tls.certresolver=route53"
 
   app:
     build:
@@ -189,8 +194,9 @@ services:
       - app
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.feedpushr.rule=Host(`ttrss.pistack.jkolios.xyz`)"
-      - "traefik.http.routers.feedpushr.entrypoints=web"
+      - "traefik.http.routers.ttrss.rule=Host(`ttrss.pistack.jkolios.xyz`)"
+      - "traefik.http.routers.ttrss.entrypoints=websecure"
+      - "traefik.http.routers.ttrss.tls.certresolver=route53"
 
 volumes:
   heimdall_config: {}
