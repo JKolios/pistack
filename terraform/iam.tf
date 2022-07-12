@@ -40,7 +40,7 @@ data "aws_iam_user" "jason" {
 
 resource "aws_iam_policy_attachment" "iam_route53_acme_challenge_policy_attachment" {
   name       = "route53_acme_challenge_policy_attachment"
-  users      = [data.aws_iam_user.jason.name]
+  users      = [data.aws_iam_user.jason.user_name]
   policy_arn = aws_iam_policy.iam_route53_acme_challenge_policy.arn
 }
 
