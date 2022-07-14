@@ -203,13 +203,53 @@ services:
       - "traefik.http.routers.ttrss.tls.certresolver=route53"
 
 volumes:
-  heimdall_config: {}
-  podgrab_config: {}
-  podgrab_data: {}
-  prometheus_data: {}
-  grafana_data: {}
-  calibre-web_config: {}
-  pg_data: {}
-  ttrss_app: {}
-  ttrss_backups: {}
-  certs: {}
+  heimdall_config:
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.1.111,nolock,soft,rw"
+      device: ":/DockerVolumes/heimdall_config"
+  podgrab_config: 
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.1.111,nolock,soft,rw"
+      device: ":/DockerVolumes/podgrab_config"
+  podgrab_data: 
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.1.111,nolock,soft,rw"
+      device: ":/DockerVolumes/podgrab_data"
+  prometheus_data: 
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.1.111,nolock,soft,rw"
+      device: ":/DockerVolumes/prometheus_data"
+  grafana_data:
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.1.111,nolock,soft,rw"
+      device: ":/DockerVolumes/grafana_data"
+  calibre-web_config: 
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.1.111,nolock,soft,rw"
+      device: ":/DockerVolumes/calibre-web_config"
+  pg_data:
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.1.111,nolock,soft,rw"
+      device: ":/DockerVolumes/pg_data"
+  ttrss_app: 
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.1.111,nolock,soft,rw"
+      device: ":/DockerVolumes/ttrss_app"
+  ttrss_backups: 
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.1.111,nolock,soft,rw"
+      device: ":/DockerVolumes/ttrss_backups"
+  certs: 
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.1.111,nolock,soft,rw"
+      device: ":/DockerVolumes/certs"

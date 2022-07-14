@@ -9,3 +9,5 @@ podgrab/data/**
 *.tfstate.backup
 *.tfvars
 *.lock.hcl
+
+**/.env
