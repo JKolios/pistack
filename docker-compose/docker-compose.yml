@@ -202,6 +202,16 @@ services:
       - "traefik.http.routers.ttrss.entrypoints=websecure"
       - "traefik.http.routers.ttrss.tls.certresolver=route53"
 
+  yeelight-controller:
+    image: ghcr.io/jkolios/yeelightcontroller:master
+    container_name: yeelight-controller
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.yeelight-controller.rule=Host(`yeelight.pistack.jkolios.xyz`)"
+      - "traefik.http.routers.yeelight-controller.entrypoints=websecure"
+      - "traefik.http.routers.yeelight-controller.tls.certresolver=route53"
+
 volumes:
   heimdall_config:
     driver_opts:
