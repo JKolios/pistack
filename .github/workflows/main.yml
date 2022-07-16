@@ -27,9 +27,9 @@ jobs:
         run: docker-compose config -q
         working-directory: ${{ env.checkout_path }}/docker-compose
 
-      - name: docker-compose down
-        run: docker-compose down --remove-orphans || true
-        working-directory: ${{ env.checkout_path }}/docker-compose
+      # - name: docker-compose down
+      #   run: docker-compose down --remove-orphans || true
+      #   working-directory: ${{ env.checkout_path }}/docker-compose
 
       - name: docker-compose up
         run: docker-compose up -d --quiet-pull --build
