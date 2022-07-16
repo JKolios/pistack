@@ -154,6 +154,7 @@ services:
       - "traefik.http.routers.calibre-web.tls.certresolver=route53"
 
   app:
+    container_name: ttrss_app
     build:
       context: ./ttrss/app
     restart: unless-stopped
@@ -165,6 +166,7 @@ services:
       - postgres
 
   backups:
+    container_name: ttrss_backups
     build:
       context: ./ttrss/app
     restart: unless-stopped
@@ -178,6 +180,7 @@ services:
     command: /opt/tt-rss/dcron.sh -f
 
   updater:
+    container_name: ttrss_updater
     build:
       context: ./ttrss/app
     restart: unless-stopped
@@ -190,6 +193,7 @@ services:
     command: /opt/tt-rss/updater.sh
 
   web-nginx:
+    container_name: ttrss_frontend
     build: ./ttrss/web-nginx
     restart: unless-stopped
     volumes:
@@ -209,11 +213,9 @@ services:
     network_mode: host
     labels:
       - "traefik.enable=false"
-      # - "traefik.http.routers.yeelight-controller.rule=Host(`yeelight.pistack.jkolios.xyz`)"
-      # - "traefik.http.routers.yeelight-controller.entrypoints=websecure"
-      # - "traefik.http.routers.yeelight-controller.tls.certresolver=route53"
 
   mitmweb:
+    container_name: mitmweb
     image: mitmproxy/mitmproxy
     restart: unless-stopped
     tty: true
@@ -229,13 +231,6 @@ services:
       - "traefik.http.routers.mitmweb.entrypoints=websecure"
       - "traefik.http.routers.mitmweb.tls.certresolver=route53"
       - "traefik.http.services.mitmweb.loadbalancer.server.port=8081"
-
-  # mitmdump:
-  #   image: mitmproxy/mitmproxy
-  #   restart: unless-stopped
-  #   command: mitmdump -nC /home/mitmproxy/flows --mode transparent
-  #   volumes:
-  #     - mitmproxy:/home/mitmproxy/
 
 volumes:
   heimdall_config:
