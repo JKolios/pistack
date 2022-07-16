@@ -16,7 +16,10 @@ jobs:
 
     steps:
       - name: generate random dir name to checkout
-        run: echo "checkout_path=$(date +%s)" >> $GITHUB_ENV
+        run: |
+          echo "checkout_path=$(date +%s)" >> $GITHUB_ENV
+          mkdir -p ${{ env.checkout_path }}
+          ln -fs --no-dereference ${{ env.checkout_path }} latest
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
