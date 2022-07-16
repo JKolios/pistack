@@ -28,6 +28,7 @@ services:
       - --certificatesresolvers.route53.acme.email=${DOMAIN_EMAIL}
       - --certificatesresolvers.route53.acme.storage=/certs/acme.json
       - "--metrics.prometheus=true"
+      - "--api.dashboard=true"
     environment:
       - TZ
       - AWS_ACCESS_KEY_ID
@@ -44,7 +45,7 @@ services:
       - "traefik.http.routers.dashboard.rule=Host(`traefik.pistack.jkolios.xyz`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
       - "traefik.http.routers.dashboard.entrypoints=websecure"
       - "traefik.http.routers.dashboard.tls.certresolver=route53"
-      - "traefik.http.services.dashboard.loadbalancer.server.port=8080"
+      - "traefik.http.routers.dashboard.service=api@internal"
 
   heimdall:
     image: lscr.io/linuxserver/heimdall
