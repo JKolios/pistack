@@ -220,7 +220,7 @@ services:
     tty: true
     ports:
       - 8080:8080
-    command: mitmweb --mode transparent
+    command: mitmweb --web-host 0.0.0.0 --web-open-browser false
     volumes:
       - mitmproxy:/home/mitmproxy/
     labels:
