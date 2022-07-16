@@ -228,6 +228,7 @@ services:
       - "traefik.http.routers.mitmweb.rule=Host(`mitmweb.pistack.jkolios.xyz`)"
       - "traefik.http.routers.mitmweb.entrypoints=websecure"
       - "traefik.http.routers.mitmweb.tls.certresolver=route53"
+      - "traefik.http.services.mitmweb.loadbalancer.server.port=8081"
 
   # mitmdump:
   #   image: mitmproxy/mitmproxy
