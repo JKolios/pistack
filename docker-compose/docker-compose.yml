@@ -220,9 +220,10 @@ services:
     tty: true
     ports:
       - 8080:8080
-    command: mitmweb --web-host 0.0.0.0 --web-open-browser false
+    command: mitmweb
     volumes:
       - mitmproxy:/home/mitmproxy/
+      - ./mitmproxy/config.yaml:/home/mitmproxy/.mitmproxy/config.yaml
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.mitmweb.rule=Host(`mitmweb.pistack.jkolios.xyz`)"
