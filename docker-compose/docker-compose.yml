@@ -208,10 +208,31 @@ services:
     restart: unless-stopped
     network_mode: host
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.yeelight-controller.rule=Host(`yeelight.pistack.jkolios.xyz`)"
+      - "traefik.enable=false"
+      # - "traefik.http.routers.yeelight-controller.rule=Host(`yeelight.pistack.jkolios.xyz`)"
+      # - "traefik.http.routers.yeelight-controller.entrypoints=websecure"
+      # - "traefik.http.routers.yeelight-controller.tls.certresolver=route53"
+
+  mitmweb:
+    image: mitmproxy/mitmproxy
+    restart: unless-stopped
+    tty: true
+    ports:
+      - 8080:8080
+      - 8081:8081
+    command: mitmweb --web-iface 0.0.0.0
+    labels:
+      - "traefik.enable=false"
+      - "traefik.http.routers.yeelight-controller.rule=Host(`mitmweb.pistack.jkolios.xyz`)"
       - "traefik.http.routers.yeelight-controller.entrypoints=websecure"
       - "traefik.http.routers.yeelight-controller.tls.certresolver=route53"
+
+  mitmdump:
+    image: mitmproxy/mitmproxy
+    restart: unless-stopped
+    command: mitmdump -nC /home/mitmproxy/flows --mode transparent
+    volumes:
+      - mitmproxy:/home/mitmproxy/
 
 volumes:
   heimdall_config:
@@ -264,3 +285,8 @@ volumes:
       type: "nfs"
       o: "addr=192.168.1.111,nolock,soft,rw"
       device: ":/volume1/DockerVolumes/certs"
+  mitmproxy: 
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.1.111,nolock,soft,rw"
+      device: ":/volume1/DockerVolumes/mitmproxy"
