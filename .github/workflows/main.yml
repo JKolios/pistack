@@ -20,7 +20,7 @@ jobs:
           checkout_path=$(date +%s)
           mkdir -p $checkout_path
           ln -fs --no-dereference $checkout_path latest
-          echo $checkout_path >> $GITHUB_ENV
+          echo "checkout_path=$checkout_path" >> $GITHUB_ENV
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
