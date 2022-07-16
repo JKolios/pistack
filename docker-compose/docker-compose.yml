@@ -220,19 +220,21 @@ services:
     ports:
       - 8080:8080
       - 8081:8081
-    command: mitmweb --web-iface 0.0.0.0
+    command: mitmweb --mode transparent
+    volumes:
+      - mitmproxy:/home/mitmproxy/
     labels:
       - "traefik.enable=false"
       - "traefik.http.routers.yeelight-controller.rule=Host(`mitmweb.pistack.jkolios.xyz`)"
       - "traefik.http.routers.yeelight-controller.entrypoints=websecure"
       - "traefik.http.routers.yeelight-controller.tls.certresolver=route53"
 
-  mitmdump:
-    image: mitmproxy/mitmproxy
-    restart: unless-stopped
-    command: mitmdump -nC /home/mitmproxy/flows --mode transparent
-    volumes:
-      - mitmproxy:/home/mitmproxy/
+  # mitmdump:
+  #   image: mitmproxy/mitmproxy
+  #   restart: unless-stopped
+  #   command: mitmdump -nC /home/mitmproxy/flows --mode transparent
+  #   volumes:
+  #     - mitmproxy:/home/mitmproxy/
 
 volumes:
   heimdall_config:
