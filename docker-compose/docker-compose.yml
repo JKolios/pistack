@@ -225,9 +225,9 @@ services:
       - mitmproxy:/home/mitmproxy/
     labels:
       - "traefik.enable=false"
-      - "traefik.http.routers.yeelight-controller.rule=Host(`mitmweb.pistack.jkolios.xyz`)"
-      - "traefik.http.routers.yeelight-controller.entrypoints=websecure"
-      - "traefik.http.routers.yeelight-controller.tls.certresolver=route53"
+      - "traefik.http.routers.mitmweb.rule=Host(`mitmweb.pistack.jkolios.xyz`)"
+      - "traefik.http.routers.mitmweb.entrypoints=websecure"
+      - "traefik.http.routers.mitmweb.tls.certresolver=route53"
 
   # mitmdump:
   #   image: mitmproxy/mitmproxy
