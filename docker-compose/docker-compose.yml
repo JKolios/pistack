@@ -195,10 +195,7 @@ services:
     restart: unless-stopped
     network_mode: host
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.ttrss.rule=Host(`yeelight-controller.pistack.jkolios.xyz`)"
-      - "traefik.http.routers.ttrss.entrypoints=websecure"
-      - "traefik.http.routers.ttrss.tls.certresolver=route53"
+      - "traefik.enable=false"
 
   mitmweb:
     container_name: mitmweb
