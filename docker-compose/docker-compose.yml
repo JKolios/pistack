@@ -47,22 +47,6 @@ services:
       - "traefik.http.routers.dashboard.tls.certresolver=route53"
       - "traefik.http.routers.dashboard.service=api@internal"
 
-  heimdall:
-    image: lscr.io/linuxserver/heimdall
-    container_name: heimdall
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=${TZ}
-    volumes:
-      - heimdall_config:/config
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.heimdall.rule=Host(`heimdall.pistack.jkolios.xyz`)"
-      - "traefik.http.routers.heimdall.entrypoints=websecure"
-      - "traefik.http.routers.heimdall.tls.certresolver=route53"
-    restart: unless-stopped
-
   podgrab:
     image: akhilrex/podgrab
     container_name: podgrab
@@ -232,11 +216,6 @@ services:
       - "traefik.http.services.mitmweb.loadbalancer.server.port=8081"
 
 volumes:
-  heimdall_config:
-    driver_opts:
-      type: "nfs"
-      o: "addr=192.168.1.111,nolock,soft,rw"
-      device: ":/volume1/DockerVolumes/heimdall_config"
   podgrab_config: 
     driver_opts:
       type: "nfs"
