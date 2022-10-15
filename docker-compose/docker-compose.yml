@@ -126,7 +126,6 @@ services:
       - ./grafana/grafana.ini:/etc/grafana/grafana.ini
     environment:
       - GF_PANELS_DISABLE_SANITIZE_HTML=true
-      - GF_INSTALL_PLUGINS=grafana-piechart-panel
     restart: always
     labels:
       - "traefik.enable=true"
