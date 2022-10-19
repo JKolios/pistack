@@ -250,9 +250,9 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.podgrab.rule=Host(`nzbget.pistack.jkolios.xyz`)"
-      - "traefik.http.routers.podgrab.entrypoints=websecure"
-      - "traefik.http.routers.podgrab.tls.certresolver=route53"
+      - "traefik.http.routers.nzbget.rule=Host(`nzbget.pistack.jkolios.xyz`)"
+      - "traefik.http.routers.nzbget.entrypoints=websecure"
+      - "traefik.http.routers.nzbget.tls.certresolver=route53"
 
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
@@ -268,9 +268,9 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.podgrab.rule=Host(`qbittorrent.pistack.jkolios.xyz`)"
-      - "traefik.http.routers.podgrab.entrypoints=websecure"
-      - "traefik.http.routers.podgrab.tls.certresolver=route53"
+      - "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.pistack.jkolios.xyz`)"
+      - "traefik.http.routers.qbittorrent.entrypoints=websecure"
+      - "traefik.http.routers.qbittorrent.tls.certresolver=route53"
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -285,9 +285,9 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.podgrab.rule=Host(`sonarr.pistack.jkolios.xyz`)"
-      - "traefik.http.routers.podgrab.entrypoints=websecure"
-      - "traefik.http.routers.podgrab.tls.certresolver=route53"
+      - "traefik.http.routers.sonarr.rule=Host(`sonarr.pistack.jkolios.xyz`)"
+      - "traefik.http.routers.sonarr.entrypoints=websecure"
+      - "traefik.http.routers.sonarr.tls.certresolver=route53"
 
   plex:
     image: lscr.io/linuxserver/plex:latest
