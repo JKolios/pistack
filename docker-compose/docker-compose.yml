@@ -46,6 +46,7 @@ services:
       - "traefik.http.routers.dashboard.entrypoints=websecure"
       - "traefik.http.routers.dashboard.tls.certresolver=route53"
       - "traefik.http.routers.dashboard.service=api@internal"
+    restart: unless-stopped
 
   podgrab:
     image: akhilrex/podgrab
@@ -128,7 +129,7 @@ services:
       - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
     volumes:
       - calibre-web_config:/config
-      - "/mnt/books/Calibre Library:/books"
+      - calibre-web_books:/books
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
@@ -260,6 +261,11 @@ volumes:
       type: "nfs"
       o: "addr=192.168.1.111,nolock,soft,rw"
       device: ":/volume1/DockerVolumes/calibre-web_config"
+  calibre-web_books:
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.1.111,nolock,soft,rw"
+      device: ":/volume1/books"
   pg_data:
     driver_opts:
       type: "nfs"
