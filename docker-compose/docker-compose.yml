@@ -307,21 +307,40 @@ services:
     labels:
       - "traefik.enable=false"
 
-  htpcmanager:
-    image: lscr.io/linuxserver/htpcmanager:latest
-    container_name: htpcmanager
+---
+version: "2.1"
+services:
+  wireguard:
+    image: lscr.io/linuxserver/wireguard:latest
+    container_name: wireguard
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Athens
+      - SERVERURL=pistack.jkolios.xyz
+      - SERVERPORT=51820 #optional
+      - PEERS=1 #optional
+      - PEERDNS=auto #optional
+      - INTERNAL_SUBNET=10.13.13.0 #optional
+      - ALLOWEDIPS=0.0.0.0/0 #optional
+      - LOG_CONFS=true #optional
     volumes:
-      - htpcmanager_config:/config
+      - wireguard_config:/config
+      - /lib/modules:/lib/modules
+    ports:
+      - "51820:51820/udp"
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.htpcmanager.rule=Host(`htpcmanager.pistack.jkolios.xyz`)"
-      - "traefik.http.routers.htpcmanager.entrypoints=websecure"
-      - "traefik.http.routers.htpcmanager.tls.certresolver=route53"
+      - "traefik.http.routers.wireguard.rule=Host(`wireguard.pistack.jkolios.xyz`)"
+      - "traefik.http.routers.wireguard.entrypoints=websecure"
+      - "traefik.http.routers.wireguard.tls.certresolver=route53"
+
 
 
 volumes:
@@ -400,11 +419,11 @@ volumes:
       type: "nfs"
       o: "addr=192.168.1.111,nolock,soft,rw"
       device: ":/volume1/DockerVolumes/sonarr_config"
-  htpcmanager_config:
+  wireguard_config:
     driver_opts:
       type: "nfs"
       o: "addr=192.168.1.111,nolock,soft,rw"
-      device: ":/volume1/DockerVolumes/htpcmanager_config"
+      device: ":/volume1/DockerVolumes/wireguard_config"
   downloads:
     driver_opts:
       type: "nfs"
