@@ -267,13 +267,13 @@ services:
       - downloads:/downloads #optional
     ports:
       - "6881:6881"
-      - "8082:8080"
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.pistack.jkolios.xyz`)"
       - "traefik.http.routers.qbittorrent.entrypoints=websecure"
       - "traefik.http.routers.qbittorrent.tls.certresolver=route53"
+      - "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
