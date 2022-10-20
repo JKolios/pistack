@@ -319,7 +319,7 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.htpcmanager.rule=Host(`  htpcmanager.pistack.jkolios.xyz`)"
+      - "traefik.http.routers.htpcmanager.rule=Host(`htpcmanager.pistack.jkolios.xyz`)"
       - "traefik.http.routers.htpcmanager.entrypoints=websecure"
       - "traefik.http.routers.htpcmanager.tls.certresolver=route53"
 
