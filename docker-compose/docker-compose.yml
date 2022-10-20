@@ -307,6 +307,22 @@ services:
     labels:
       - "traefik.enable=false"
 
+  htpcmanager:
+    image: lscr.io/linuxserver/htpcmanager:latest
+    container_name: htpcmanager
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Athens
+    volumes:
+      - htpcmanager_config:/config
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.htpcmanager.rule=Host(`  htpcmanager.pistack.jkolios.xyz`)"
+      - "traefik.http.routers.htpcmanager.entrypoints=websecure"
+      - "traefik.http.routers.htpcmanager.tls.certresolver=route53"
+
 
 volumes:
   podgrab_config: 
@@ -384,6 +400,11 @@ volumes:
       type: "nfs"
       o: "addr=192.168.1.111,nolock,soft,rw"
       device: ":/volume1/DockerVolumes/sonarr_config"
+  htpcmanager_config:
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.1.111,nolock,soft,rw"
+      device: ":/volume1/DockerVolumes/htpcmanager_config"
   downloads:
     driver_opts:
       type: "nfs"
