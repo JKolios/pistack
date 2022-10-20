@@ -204,7 +204,7 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - 8080:8080
+      - 8081:8080
     command: mitmweb
     volumes:
       - mitmproxy:/home/mitmproxy/
@@ -265,6 +265,9 @@ services:
     volumes:
       - qbittorrent_config:/config
       - downloads:/downloads #optional
+    ports:
+      - "6881:6881"
+      - "8082:8080"
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
