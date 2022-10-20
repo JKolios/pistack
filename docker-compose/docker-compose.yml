@@ -307,9 +307,6 @@ services:
     labels:
       - "traefik.enable=false"
 
----
-version: "2.1"
-services:
   wireguard:
     image: lscr.io/linuxserver/wireguard:latest
     container_name: wireguard
@@ -340,8 +337,6 @@ services:
       - "traefik.http.routers.wireguard.rule=Host(`wireguard.pistack.jkolios.xyz`)"
       - "traefik.http.routers.wireguard.entrypoints=websecure"
       - "traefik.http.routers.wireguard.tls.certresolver=route53"
-
-
 
 volumes:
   podgrab_config: 
