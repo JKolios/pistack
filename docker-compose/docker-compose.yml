@@ -42,7 +42,7 @@ services:
       - certs:/certs
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=Host(`traefik.pistack.jkolios.xyz`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
+      - "traefik.http.routers.dashboard.rule=Host(`traefik.pistack.jkolios.xyz`) && ( PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
       - "traefik.http.routers.dashboard.entrypoints=websecure"
       - "traefik.http.routers.dashboard.tls.certresolver=route53"
       - "traefik.http.routers.dashboard.service=api@internal"
@@ -288,7 +288,7 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.sonarr.rule=Host(`sonarr.pistack.jkolios.xyz`)"
+      - "traefik.http.routers.sonarr.rule=HostRegexp(`sonarr.pistack(?:-remote)?\\.jkolios\\.xyz`)"
       - "traefik.http.routers.sonarr.entrypoints=websecure"
       - "traefik.http.routers.sonarr.tls.certresolver=route53"
 
