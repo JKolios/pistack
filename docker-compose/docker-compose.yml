@@ -288,7 +288,7 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.sonarr.rule=HostRegexp(`sonarr.pistack(?:-remote)?\\.jkolios\\.xyz`)"
+      - "traefik.http.routers.sonarr.rule=Host(`sonarr.pistack.jkolios.xyz`)"
       - "traefik.http.routers.sonarr.entrypoints=websecure"
       - "traefik.http.routers.sonarr.tls.certresolver=route53"
 
