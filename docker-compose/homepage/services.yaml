@@ -53,7 +53,7 @@
       container: traefik
       widget:
         type: traefik
-        url: https://traefik.pistack.jkolios.xyz/dashboard
+        url: https://traefik.pistack.jkolios.xyz
 
 - Media:
   - Podgrab:
@@ -77,7 +77,7 @@
       widget:
         type: plex
         url: http://pistack.jkolios.xyz:32400
-        key: 5V4GUGhWVLcnEA9zkCQD
+        key: 7V87ro7hH3wCcEdfDk4m
   - TTRSS:
       icon: tinytinyrss
       href: https://ttrss.pistack.jkolios.xyz
