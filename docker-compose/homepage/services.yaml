@@ -74,10 +74,6 @@
       description: Plex Media Server
       server: local-docker
       container: plex
-      widget:
-        type: plex
-        url: http://pistack.jkolios.xyz:32400
-        key: 7V87ro7hH3wCcEdfDk4m
   - TTRSS:
       icon: tinytinyrss
       href: https://ttrss.pistack.jkolios.xyz
