@@ -1,0 +1,80 @@
+- resources:
+    cpu: true
+    memory: true
+
+- greeting:
+    text_size: xl
+    text: Pistack
+
+- Piracy:
+  - Sonarr:
+    icon: sonarr
+    href: https://sonarr.pistack.jkolios.xyz
+    description: Series management
+    widget:
+      type: sonarr
+      url: https://sonarr.pistack.jkolios.xyz
+      key: 1fd835c840144354b711c758679ade32
+  - NZBget:
+    icon: nzbget
+    href: https://nzbget.pistack.jkolios.xyz
+    description: Newsgroups downloader
+    widget:
+      type: nzbget
+      url: https://nzbget.pistack.jkolios.xyz
+      username: nzbget
+      password: nzbget
+  - Qbittorrent:
+    icon: qbittorrent
+    href: https://qbittorrent.pistack.jkolios.xyz
+    description: Newsgroups downloader
+    widget:
+      type: qbittorrent
+      url: https://qbittorrent.pistack.jkolios.xyz
+      username: admin
+      password: adminadmin
+
+- Network:
+  - Blocky:
+    icon: blocky
+    href: https://blocky.pistack.jkolios.xyz
+    description: DNS Server/Cache
+  - Wireguard:
+    icon: wireguard
+    href: https://wireguard.pistack.jkolios.xyz
+    description: VPN
+  - Traefik:
+    icon: traefik
+    href: https://traefik.pistack.jkolios.xyz/dashboard
+    description: Reverse Proxy/Ingress
+    widget:
+      type: traefik
+      url: https://traefik.pistack.jkolios.xyz/dashboard
+
+- Media:
+  - Podgrab:
+    icon: podify
+    href: https://podgrab.pistack.jkolios.xyz
+    description: Podcast Aggregator
+  - calibre-web:
+    icon: calibreweb
+    href: https://calibre-web.pistack.jkolios.xyz
+    description: Calibre E-book Library UI
+  - Plex:
+    icon: plex-square
+    href: http://pistack.jkolios.xyz:32400
+    description: Plex Media Server
+    widget:
+      type: plex
+      url: http://pistack.jkolios.xyz:32400
+      key: 5V4GUGhWVLcnEA9zkCQD
+  - TTRSS:
+    icon: tinytinyrss
+    href: https://ttrss.pistack.jkolios.xyz
+    description: RSS Aggregator
+    
+- Home Automation:
+  - Yeelight Controller:
+    icon: spotweb
+    href: http://pistack.jkolios.xyz:4000/lights
+    description: Series management

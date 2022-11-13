@@ -42,7 +42,7 @@ services:
       - certs:/certs
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=Host(`traefik.pistack.jkolios.xyz`) && ( PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
+      - "traefik.http.routers.dashboard.rule=Host(`traefik.pistack.jkolios.xyz`)"
       - "traefik.http.routers.dashboard.entrypoints=websecure"
       - "traefik.http.routers.dashboard.tls.certresolver=route53"
       - "traefik.http.routers.dashboard.service=api@internal"
@@ -198,23 +198,23 @@ services:
     labels:
       - "traefik.enable=false"
 
-  mitmweb:
-    container_name: mitmweb
-    image: mitmproxy/mitmproxy
-    restart: unless-stopped
-    tty: true
-    ports:
-      - 8081:8080
-    command: mitmweb
-    volumes:
-      - mitmproxy:/home/mitmproxy/
-      - ./mitmproxy/config.yaml:/home/mitmproxy/.mitmproxy/config.yaml
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.mitmweb.rule=Host(`mitmweb.pistack.jkolios.xyz`)"
-      - "traefik.http.routers.mitmweb.entrypoints=websecure"
-      - "traefik.http.routers.mitmweb.tls.certresolver=route53"
-      - "traefik.http.services.mitmweb.loadbalancer.server.port=8081"
+  # mitmweb:
+  #   container_name: mitmweb
+  #   image: mitmproxy/mitmproxy
+  #   restart: unless-stopped
+  #   tty: true
+  #   ports:
+  #     - 8081:8080
+  #   command: mitmweb
+  #   volumes:
+  #     - mitmproxy:/home/mitmproxy/
+  #     - ./mitmproxy/config.yaml:/home/mitmproxy/.mitmproxy/config.yaml
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.mitmweb.rule=Host(`mitmweb.pistack.jkolios.xyz`)"
+  #     - "traefik.http.routers.mitmweb.entrypoints=websecure"
+  #     - "traefik.http.routers.mitmweb.tls.certresolver=route53"
+  #     - "traefik.http.services.mitmweb.loadbalancer.server.port=8081"
 
   ddns-route53:
     image: crazymax/ddns-route53:latest
@@ -334,9 +334,23 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.wireguard.rule=Host(`wireguard.pistack-remote.jkolios.xyz`)"
+      - "traefik.http.routers.wireguard.rule=Host(`wireguard.pistack.jkolios.xyz`)"
       - "traefik.http.routers.wireguard.entrypoints=websecure"
       - "traefik.http.routers.wireguard.tls.certresolver=route53"
+
+  homepage:
+    image: ghcr.io/benphelps/homepage:latest
+    container_name: homepage
+    ports:
+      - 3000:3000
+    volumes:
+      - ./homepage:/app/config # Make sure your local config directory exists
+      - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homepage.rule=Host(`homepage.pistack.jkolios.xyz`)"
+      - "traefik.http.routers.homepage.entrypoints=websecure"
+      - "traefik.http.routers.homepage.tls.certresolver=route53"
 
 volumes:
   podgrab_config: 
