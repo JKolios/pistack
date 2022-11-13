@@ -1,0 +1,7 @@
+- resources:
+    cpu: true
+    memory: true
+
+- greeting:
+    text_size: xl
+    text: Pistack
