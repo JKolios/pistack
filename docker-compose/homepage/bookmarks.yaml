@@ -1,5 +1,7 @@
 - LAN:
   - Router:
-    href: "http://192.168.1.1"
+      - abbr: RT
+        href: "http://192.168.1.1"
   - Ds216se:
-    href: "http://192.168.1.111:5000"
+      - abbr: DS
+        href: "http://192.168.1.111:5000"
