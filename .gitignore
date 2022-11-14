@@ -11,3 +11,6 @@ podgrab/data/**
 *.lock.hcl
 
 **/.env
+
+.idea/**
+**/.DS_Store
