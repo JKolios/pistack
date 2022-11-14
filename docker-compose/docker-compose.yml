@@ -100,23 +100,23 @@ services:
       - "traefik.http.routers.prometheus.entrypoints=websecure"
       - "traefik.http.routers.prometheus.tls.certresolver=route53"
 
-  grafana:
-    image: grafana/grafana:6.7.1
-    container_name: grafana
-    depends_on:
-      - prometheus
-    volumes:
-      - grafana_data:/var/lib/grafana
-      - ./grafana/provisioning/:/etc/grafana/provisioning/
-      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
-    environment:
-      - GF_PANELS_DISABLE_SANITIZE_HTML=true
-    restart: always
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.grafana.rule=Host(`grafana.pistack.jkolios.xyz`)"
-      - "traefik.http.routers.grafana.entrypoints=websecure"
-      - "traefik.http.routers.grafana.tls.certresolver=route53"
+  # grafana:
+  #   image: grafana/grafana:6.7.1
+  #   container_name: grafana
+  #   depends_on:
+  #     - prometheus
+  #   volumes:
+  #     - grafana_data:/var/lib/grafana
+  #     - ./grafana/provisioning/:/etc/grafana/provisioning/
+  #     - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+  #   environment:
+  #     - GF_PANELS_DISABLE_SANITIZE_HTML=true
+  #   restart: always
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.grafana.rule=Host(`grafana.pistack.jkolios.xyz`)"
+  #     - "traefik.http.routers.grafana.entrypoints=websecure"
+  #     - "traefik.http.routers.grafana.tls.certresolver=route53"
 
   calibre-web:
     image: lscr.io/linuxserver/calibre-web:latest
