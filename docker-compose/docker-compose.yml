@@ -27,7 +27,7 @@ services:
       - --certificatesresolvers.route53.acme.dnschallenge.resolvers=1.1.1.1:53
       - --certificatesresolvers.route53.acme.email=${DOMAIN_EMAIL}
       - --certificatesresolvers.route53.acme.storage=/certs/acme.json
-      - "--metrics.prometheus=true"
+      # - "--metrics.prometheus=true"
       - "--api.dashboard=true"
     environment:
       - TZ
@@ -82,23 +82,23 @@ services:
       - "traefik.http.routers.blocky.tls.certresolver=route53"
       - "traefik.http.services.blocky.loadbalancer.server.port=4000"
 
-  prometheus:
-    image: prom/prometheus
-    container_name: prometheus
-    volumes:
-      - ./prometheus/:/etc/prometheus/
-      - prometheus_data:/prometheus
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
-      - '--web.console.templates=/usr/share/prometheus/consoles'
-    restart: always
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.prometheus.rule=Host(`prometheus.pistack.jkolios.xyz`)"
-      - "traefik.http.routers.prometheus.entrypoints=websecure"
-      - "traefik.http.routers.prometheus.tls.certresolver=route53"
+  # prometheus:
+  #   image: prom/prometheus
+  #   container_name: prometheus
+  #   volumes:
+  #     - ./prometheus/:/etc/prometheus/
+  #     - prometheus_data:/prometheus
+  #   command:
+  #     - '--config.file=/etc/prometheus/prometheus.yml'
+  #     - '--storage.tsdb.path=/prometheus'
+  #     - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+  #     - '--web.console.templates=/usr/share/prometheus/consoles'
+  #   restart: always
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.prometheus.rule=Host(`prometheus.pistack.jkolios.xyz`)"
+  #     - "traefik.http.routers.prometheus.entrypoints=websecure"
+  #     - "traefik.http.routers.prometheus.tls.certresolver=route53"
 
   # grafana:
   #   image: grafana/grafana:6.7.1
@@ -353,17 +353,17 @@ services:
       - "traefik.http.routers.homepage.tls.certresolver=route53"
 
 volumes:
-  podgrab_config: 
+  podgrab_config:
     driver_opts:
       type: "nfs"
       o: "addr=192.168.1.111,nolock,soft,rw"
       device: ":/volume1/DockerVolumes/podgrab_config"
-  podgrab_data: 
+  podgrab_data:
     driver_opts:
       type: "nfs"
       o: "addr=192.168.1.111,nolock,soft,rw"
       device: ":/volume1/DockerVolumes/podgrab_data"
-  prometheus_data: 
+  prometheus_data:
     driver_opts:
       type: "nfs"
       o: "addr=192.168.1.111,nolock,soft,rw"
@@ -373,7 +373,7 @@ volumes:
       type: "nfs"
       o: "addr=192.168.1.111,nolock,soft,rw"
       device: ":/volume1/DockerVolumes/grafana_data"
-  calibre-web_config: 
+  calibre-web_config:
     driver_opts:
       type: "nfs"
       o: "addr=192.168.1.111,nolock,soft,rw"
@@ -388,22 +388,22 @@ volumes:
       type: "nfs"
       o: "addr=192.168.1.111,nolock,soft,rw"
       device: ":/volume1/DockerVolumes/pg_data"
-  ttrss_app: 
+  ttrss_app:
     driver_opts:
       type: "nfs"
       o: "addr=192.168.1.111,nolock,soft,rw"
       device: ":/volume1/DockerVolumes/ttrss_app"
-  ttrss_backups: 
+  ttrss_backups:
     driver_opts:
       type: "nfs"
       o: "addr=192.168.1.111,nolock,soft,rw"
       device: ":/volume1/DockerVolumes/ttrss_backups"
-  certs: 
+  certs:
     driver_opts:
       type: "nfs"
       o: "addr=192.168.1.111,nolock,soft,rw"
       device: ":/volume1/DockerVolumes/certs"
-  mitmproxy: 
+  mitmproxy:
     driver_opts:
       type: "nfs"
       o: "addr=192.168.1.111,nolock,soft,rw"
@@ -438,4 +438,3 @@ volumes:
       type: "nfs"
       o: "addr=192.168.1.111,nolock,soft,rw"
       device: ":/volume1/Storage/downloads"
-
