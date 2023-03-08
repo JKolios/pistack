@@ -42,7 +42,7 @@ services:
       - certs:/certs
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=Host(`traefik.pistack-ipv6.jkolios.xyz`)"
+      - "traefik.http.routers.dashboard.rule=Host(`traefik.pistack.jkolios.xyz`)"
       - "traefik.http.routers.dashboard.entrypoints=websecure"
       - "traefik.http.routers.dashboard.tls.certresolver=route53"
       - "traefik.http.routers.dashboard.service=api@internal"
@@ -58,7 +58,7 @@ services:
       - podgrab_data:/assets
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.podgrab.rule=Host(`podgrab.pistack-ipv6.jkolios.xyz`)"
+      - "traefik.http.routers.podgrab.rule=Host(`podgrab.pistack.jkolios.xyz`)"
       - "traefik.http.routers.podgrab.entrypoints=websecure"
       - "traefik.http.routers.podgrab.tls.certresolver=route53"
     restart: unless-stopped
@@ -77,7 +77,7 @@ services:
       - "53:53/udp"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.blocky.rule=Host(`blocky.pistack-ipv6.jkolios.xyz`)"
+      - "traefik.http.routers.blocky.rule=Host(`blocky.pistack.jkolios.xyz`)"
       - "traefik.http.routers.blocky.entrypoints=websecure"
       - "traefik.http.routers.blocky.tls.certresolver=route53"
       - "traefik.http.services.blocky.loadbalancer.server.port=4000"
@@ -96,7 +96,7 @@ services:
   #   restart: always
   #   labels:
   #     - "traefik.enable=true"
-  #     - "traefik.http.routers.prometheus.rule=Host(`prometheus.pistack-ipv6.jkolios.xyz`)"
+  #     - "traefik.http.routers.prometheus.rule=Host(`prometheus.pistack.jkolios.xyz`)"
   #     - "traefik.http.routers.prometheus.entrypoints=websecure"
   #     - "traefik.http.routers.prometheus.tls.certresolver=route53"
 
@@ -114,7 +114,7 @@ services:
   #   restart: always
   #   labels:
   #     - "traefik.enable=true"
-  #     - "traefik.http.routers.grafana.rule=Host(`grafana.pistack-ipv6.jkolios.xyz`)"
+  #     - "traefik.http.routers.grafana.rule=Host(`grafana.pistack.jkolios.xyz`)"
   #     - "traefik.http.routers.grafana.entrypoints=websecure"
   #     - "traefik.http.routers.grafana.tls.certresolver=route53"
 
@@ -133,7 +133,7 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.calibre-web.rule=Host(`calibre-web.pistack-ipv6.jkolios.xyz`)"
+      - "traefik.http.routers.calibre-web.rule=Host(`calibre-web.pistack.jkolios.xyz`)"
       - "traefik.http.routers.calibre-web.entrypoints=websecure"
       - "traefik.http.routers.calibre-web.tls.certresolver=route53"
 
@@ -186,7 +186,7 @@ services:
       - app
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.ttrss.rule=Host(`ttrss.pistack-ipv6.jkolios.xyz`)"
+      - "traefik.http.routers.ttrss.rule=Host(`ttrss.pistack.jkolios.xyz`)"
       - "traefik.http.routers.ttrss.entrypoints=websecure"
       - "traefik.http.routers.ttrss.tls.certresolver=route53"
 
@@ -211,7 +211,7 @@ services:
   #     - ./mitmproxy/config.yaml:/home/mitmproxy/.mitmproxy/config.yaml
   #   labels:
   #     - "traefik.enable=true"
-  #     - "traefik.http.routers.mitmweb.rule=Host(`mitmweb.pistack-ipv6.jkolios.xyz`)"
+  #     - "traefik.http.routers.mitmweb.rule=Host(`mitmweb.pistack.jkolios.xyz`)"
   #     - "traefik.http.routers.mitmweb.entrypoints=websecure"
   #     - "traefik.http.routers.mitmweb.tls.certresolver=route53"
   #     - "traefik.http.services.mitmweb.loadbalancer.server.port=8081"
@@ -250,7 +250,7 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.nzbget.rule=Host(`nzbget.pistack-ipv6.jkolios.xyz`)"
+      - "traefik.http.routers.nzbget.rule=Host(`nzbget.pistack.jkolios.xyz`)"
       - "traefik.http.routers.nzbget.entrypoints=websecure"
       - "traefik.http.routers.nzbget.tls.certresolver=route53"
 
@@ -270,7 +270,7 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.pistack-ipv6.jkolios.xyz`)"
+      - "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.pistack.jkolios.xyz`)"
       - "traefik.http.routers.qbittorrent.entrypoints=websecure"
       - "traefik.http.routers.qbittorrent.tls.certresolver=route53"
       - "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"
@@ -288,7 +288,7 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.sonarr.rule=Host(`sonarr.pistack-ipv6.jkolios.xyz`)"
+      - "traefik.http.routers.sonarr.rule=Host(`sonarr.pistack.jkolios.xyz`)"
       - "traefik.http.routers.sonarr.entrypoints=websecure"
       - "traefik.http.routers.sonarr.tls.certresolver=route53"
 
@@ -317,7 +317,7 @@ services:
   #     - PUID=1000
   #     - PGID=1000
   #     - TZ=Europe/Athens
-  #     - SERVERURL=pistack-ipv6.jkolios.xyz
+  #     - SERVERURL=pistack.jkolios.xyz
   #     - SERVERPORT=51820 #optional
   #     - PEERS=1 #optional
   #     - PEERDNS=auto #optional
@@ -334,7 +334,7 @@ services:
   #   restart: unless-stopped
   #   labels:
   #     - "traefik.enable=true"
-  #     - "traefik.http.routers.wireguard.rule=Host(`wireguard.pistack-ipv6.jkolios.xyz`)"
+  #     - "traefik.http.routers.wireguard.rule=Host(`wireguard.pistack.jkolios.xyz`)"
   #     - "traefik.http.routers.wireguard.entrypoints=websecure"
   #     - "traefik.http.routers.wireguard.tls.certresolver=route53"
 
@@ -348,7 +348,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.homepage.rule=Host(`homepage.pistack-ipv6.jkolios.xyz`)"
+      - "traefik.http.routers.homepage.rule=Host(`homepage.pistack.jkolios.xyz`)"
       - "traefik.http.routers.homepage.entrypoints=websecure"
       - "traefik.http.routers.homepage.tls.certresolver=route53"
 
