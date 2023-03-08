@@ -29,3 +29,11 @@ storage = "/certs/acme.json"
 provider="route53"
 delayBeforeCheck=0
 resolvers="1.1.1.1:53"
+
+
+[http]
+  [http.routers]
+    [http.routers.traefik]
+      entrypoints = ["web"]
+      rule = "Host('traefik', 'traefik.pistack.jkolios.xyz')"
+      service = "api@internal"

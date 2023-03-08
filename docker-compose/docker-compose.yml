@@ -28,8 +28,6 @@ services:
       - certs:/certs
       - "./traefik/traefik.toml:/etc/traefik/traefik.toml"
     restart: unless-stopped
-    networks:
-       - traefik
 
   podgrab:
     image: akhilrex/podgrab
@@ -421,9 +419,3 @@ volumes:
       type: "nfs"
       o: "addr=192.168.1.111,nolock,soft,rw"
       device: ":/volume1/Storage/downloads"
-
-
-networks:
-  traefik:
-    external:
-      name: traefik
