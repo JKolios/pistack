@@ -99,6 +99,6 @@
       - Yeelight Controller:
             icon: spotweb
             href: http://pistack.jkolios.xyz:4000/lights
-            description: Series management
+            description: Smart Light Controller
             server: local-docker
             container: yeelight-controller
