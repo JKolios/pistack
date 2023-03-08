@@ -423,7 +423,7 @@ volumes:
       device: ":/volume1/Storage/downloads"
 
 
- networks:
-   traefik:
-     external:
-       name: traefik
+networks:
+  traefik:
+    external:
+      name: traefik
