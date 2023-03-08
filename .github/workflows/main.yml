@@ -13,7 +13,6 @@ on:
 jobs:
   docker-compose-reup:
     runs-on: [self-hosted, linux, ARM64]
-
     steps:
       - name: generate random dir name to checkout
         run: |
@@ -44,6 +43,7 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           DOMAIN_EMAIL: ${{ secrets.DOMAIN_EMAIL }}
+          COMPOSE_HTTP_TIMEOUT: 600
 
   terraform:
     runs-on: ubuntu-latest
