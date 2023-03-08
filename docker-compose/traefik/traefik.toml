@@ -18,8 +18,11 @@ level="DEBUG"
 
 [providers.docker]
 endpoint = "unix:///var/run/docker.sock"
-network = "traefik"
 exposedByDefault = false
+
+[providers.file]
+   directory = "/etc/traefik/config"
+   watch = true
 
 [certificatesResolvers.route53.acme]
 email = "precursor@gmail.com"
@@ -29,11 +32,3 @@ storage = "/certs/acme.json"
 provider="route53"
 delayBeforeCheck=0
 resolvers="1.1.1.1:53"
-
-
-[http]
-  [http.routers]
-    [http.routers.traefik]
-      entrypoints = ["web"]
-      rule = "Host('traefik', 'traefik.pistack.jkolios.xyz')"
-      service = "api@internal"

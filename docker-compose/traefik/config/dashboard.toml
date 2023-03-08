@@ -1,0 +1,6 @@
+[http]
+  [http.routers]
+    [http.routers.traefik]
+      entrypoints = ["websecure"]
+      rule = "Host('traefik', 'traefik.pistack.jkolios.xyz')"
+      service = "api@internal"
