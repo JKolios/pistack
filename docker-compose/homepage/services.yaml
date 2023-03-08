@@ -23,7 +23,7 @@
       - Qbittorrent:
             icon: qbittorrent
             href: https://qbittorrent.pistack.jkolios.xyz
-            description: Newsgroups downloader
+            description: Torrent Client
             server: local-docker
             container: qbittorrent
             widget:
