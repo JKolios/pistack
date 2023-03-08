@@ -15,20 +15,6 @@ services:
   traefik:
     image: "traefik:v2.8"
     container_name: traefik
-    command:
-      - "--log.level=DEBUG"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
-      - --certificatesresolvers.route53.acme.dnschallenge=true
-      - --certificatesresolvers.route53.acme.dnschallenge.provider=route53
-      - --certificatesresolvers.route53.acme.dnschallenge.delayBeforeCheck=0
-      - --certificatesresolvers.route53.acme.dnschallenge.resolvers=1.1.1.1:53
-      - --certificatesresolvers.route53.acme.email=${DOMAIN_EMAIL}
-      - --certificatesresolvers.route53.acme.storage=/certs/acme.json
-      # - "--metrics.prometheus=true"
-      - "--api.dashboard=true"
     environment:
       - TZ
       - AWS_ACCESS_KEY_ID
@@ -40,13 +26,10 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - certs:/certs
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=Host(`traefik.pistack.jkolios.xyz`)"
-      - "traefik.http.routers.dashboard.entrypoints=websecure"
-      - "traefik.http.routers.dashboard.tls.certresolver=route53"
-      - "traefik.http.routers.dashboard.service=api@internal"
+      - "./traefik/traefik.toml:/etc/traefik/traefik.toml"
     restart: unless-stopped
+    networks:
+       - traefik
 
   podgrab:
     image: akhilrex/podgrab
@@ -438,3 +421,9 @@ volumes:
       type: "nfs"
       o: "addr=192.168.1.111,nolock,soft,rw"
       device: ":/volume1/Storage/downloads"
+
+
+ networks:
+   traefik:
+     external:
+       name: traefik
