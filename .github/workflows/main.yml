@@ -25,6 +25,9 @@ jobs:
       - uses: actions/checkout@v3
         with:
           path: ${{ env.checkout_path }}
+      
+      - name: create config files based on templates
+        run: .ci/template.sh
 
       - name: docker-compose validate
         run: docker-compose config -q

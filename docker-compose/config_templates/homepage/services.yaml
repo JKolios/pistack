@@ -81,19 +81,19 @@
             server: local-docker
             container: ttrss_frontend
 
-# - Monitoring:
-#   - Prometheus:
-#       icon: prometheus
-#       href: https://prometheus.pistack.jkolios.xy
-#       description: Prometheus Time Series DB
-#       server: local-docker
-#       container: prometheus
-#   - Grafana:
-#       icon: grafana
-#       href: https://grafana.pistack.jkolios.xy
-#       description: Grafana Dashboards
-#       server: local-docker
-#       container: grafana
+- Monitoring:
+  - Prometheus:
+      icon: prometheus
+      href: https://prometheus.${DOMAIN}
+      description: Prometheus Time Series DB
+      server: local-docker
+      container: prometheus
+  - Grafana:
+      icon: grafana
+      href: https://grafana.${DOMAIN}
+      description: Grafana Dashboards
+      server: local-docker
+      container: grafana
 
 - Home Automation:
       - Yeelight Controller:

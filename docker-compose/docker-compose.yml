@@ -67,7 +67,7 @@ services:
     image: prom/prometheus
     container_name: prometheus
     volumes:
-      - ./prometheus/:/etc/prometheus/
+      - ./configs/prometheus/:/etc/prometheus/
       - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -88,8 +88,8 @@ services:
       - prometheus
     volumes:
       - grafana_data:/var/lib/grafana
-      - ./grafana/provisioning/:/etc/grafana/provisioning/
-      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+      - ./configs/grafana/provisioning/:/etc/grafana/provisioning/
+      - ./configs/grafana/grafana.ini:/etc/grafana/grafana.ini
     environment:
       - GF_PANELS_DISABLE_SANITIZE_HTML=true
     restart: always
@@ -150,7 +150,7 @@ services:
       context: ./ttrss/app
     restart: unless-stopped
     env_file:
-      - ./ttrss/.env
+      - ./configs/ttrss/.env
     volumes:
       - ttrss_app:/var/www/html
     depends_on:
@@ -282,7 +282,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./homepage:/app/config # Make sure your local config directory exists
+      - ./configs/homepage:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
     labels:
       - "traefik.enable=true"
