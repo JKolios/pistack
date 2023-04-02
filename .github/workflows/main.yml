@@ -30,10 +30,6 @@ jobs:
         run: docker-compose config -q
         working-directory: ${{ env.checkout_path }}/docker-compose
 
-      # - name: docker-compose down
-      #   run: docker-compose down --remove-orphans || true
-      #   working-directory: ${{ env.checkout_path }}/docker-compose
-
       - name: docker-compose up
         run: docker-compose up -d --quiet-pull --build
         working-directory: ${{ env.checkout_path }}/docker-compose
@@ -45,29 +41,4 @@ jobs:
           DOMAIN_EMAIL: ${{ secrets.DOMAIN_EMAIL }}
           COMPOSE_HTTP_TIMEOUT: 600
 
-  terraform:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
-        with:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-
-      - name: Terraform Format
-        id: fmt
-        run: terraform fmt -check
-        working-directory: terraform
-
-      - name: Terraform Init
-        id: init
-        run: terraform init
-        working-directory: terraform
-
-      - name: Terraform Validate
-        id: validate
-        run: terraform validate -no-color
-        working-directory: terraform
 

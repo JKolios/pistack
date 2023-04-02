@@ -39,7 +39,7 @@ services:
       - podgrab_data:/assets
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.podgrab.rule=Host(`podgrab.pistack.jkolios.xyz`)"
+      - "traefik.http.routers.podgrab.rule=Host(`podgrab.${DOMAIN}`)"
       - "traefik.http.routers.podgrab.entrypoints=websecure"
       - "traefik.http.routers.podgrab.tls.certresolver=route53"
     restart: unless-stopped
@@ -58,46 +58,46 @@ services:
       - "53:53/udp"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.blocky.rule=Host(`blocky.pistack.jkolios.xyz`)"
+      - "traefik.http.routers.blocky.rule=Host(`blocky.${DOMAIN}`)"
       - "traefik.http.routers.blocky.entrypoints=websecure"
       - "traefik.http.routers.blocky.tls.certresolver=route53"
       - "traefik.http.services.blocky.loadbalancer.server.port=4000"
 
-  # prometheus:
-  #   image: prom/prometheus
-  #   container_name: prometheus
-  #   volumes:
-  #     - ./prometheus/:/etc/prometheus/
-  #     - prometheus_data:/prometheus
-  #   command:
-  #     - '--config.file=/etc/prometheus/prometheus.yml'
-  #     - '--storage.tsdb.path=/prometheus'
-  #     - '--web.console.libraries=/usr/share/prometheus/console_libraries'
-  #     - '--web.console.templates=/usr/share/prometheus/consoles'
-  #   restart: always
-  #   labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.prometheus.rule=Host(`prometheus.pistack.jkolios.xyz`)"
-  #     - "traefik.http.routers.prometheus.entrypoints=websecure"
-  #     - "traefik.http.routers.prometheus.tls.certresolver=route53"
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prometheus.rule=Host(`prometheus.${DOMAIN}`)"
+      - "traefik.http.routers.prometheus.entrypoints=websecure"
+      - "traefik.http.routers.prometheus.tls.certresolver=route53"
 
-  # grafana:
-  #   image: grafana/grafana:6.7.1
-  #   container_name: grafana
-  #   depends_on:
-  #     - prometheus
-  #   volumes:
-  #     - grafana_data:/var/lib/grafana
-  #     - ./grafana/provisioning/:/etc/grafana/provisioning/
-  #     - ./grafana/grafana.ini:/etc/grafana/grafana.ini
-  #   environment:
-  #     - GF_PANELS_DISABLE_SANITIZE_HTML=true
-  #   restart: always
-  #   labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.grafana.rule=Host(`grafana.pistack.jkolios.xyz`)"
-  #     - "traefik.http.routers.grafana.entrypoints=websecure"
-  #     - "traefik.http.routers.grafana.tls.certresolver=route53"
+  grafana:
+    image: grafana/grafana:6.7.1
+    container_name: grafana
+    depends_on:
+      - prometheus
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+    environment:
+      - GF_PANELS_DISABLE_SANITIZE_HTML=true
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.${DOMAIN}`)"
+      - "traefik.http.routers.grafana.entrypoints=websecure"
+      - "traefik.http.routers.grafana.tls.certresolver=route53"
 
   calibre-web:
     image: lscr.io/linuxserver/calibre-web:latest
@@ -106,15 +106,15 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=${TZ}
-      - DOCKER_MODS=linuxserver/calibre-web:calibre #optional
-      - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
+      - DOCKER_MODS=linuxserver/calibre-web:calibre 
+      - OAUTHLIB_RELAX_TOKEN_SCOPE=1 
     volumes:
       - calibre-web_config:/config
       - calibre-web_books:/books
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.calibre-web.rule=Host(`calibre-web.pistack.jkolios.xyz`)"
+      - "traefik.http.routers.calibre-web.rule=Host(`calibre-web.${DOMAIN}`)"
       - "traefik.http.routers.calibre-web.entrypoints=websecure"
       - "traefik.http.routers.calibre-web.tls.certresolver=route53"
 
@@ -167,7 +167,7 @@ services:
       - app
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.ttrss.rule=Host(`ttrss.pistack.jkolios.xyz`)"
+      - "traefik.http.routers.ttrss.rule=Host(`ttrss.${DOMAIN}`)"
       - "traefik.http.routers.ttrss.entrypoints=websecure"
       - "traefik.http.routers.ttrss.tls.certresolver=route53"
 
@@ -179,24 +179,6 @@ services:
     labels:
       - "traefik.enable=false"
 
-  # mitmweb:
-  #   container_name: mitmweb
-  #   image: mitmproxy/mitmproxy
-  #   restart: unless-stopped
-  #   tty: true
-  #   ports:
-  #     - 8081:8080
-  #   command: mitmweb
-  #   volumes:
-  #     - mitmproxy:/home/mitmproxy/
-  #     - ./mitmproxy/config.yaml:/home/mitmproxy/.mitmproxy/config.yaml
-  #   labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.mitmweb.rule=Host(`mitmweb.pistack.jkolios.xyz`)"
-  #     - "traefik.http.routers.mitmweb.entrypoints=websecure"
-  #     - "traefik.http.routers.mitmweb.tls.certresolver=route53"
-  #     - "traefik.http.services.mitmweb.loadbalancer.server.port=8081"
-
   ddns-route53:
     image: crazymax/ddns-route53:latest
     container_name: ddns-route53
@@ -207,13 +189,19 @@ services:
       - "LOG_JSON=false"
       - "DDNSR53_CREDENTIALS_ACCESSKEYID=${AWS_ACCESS_KEY_ID}"
       - "DDNSR53_CREDENTIALS_SECRETACCESSKEY=${AWS_SECRET_ACCESS_KEY}"
-      - "DDNSR53_ROUTE53_HOSTEDZONEID=Z046614912T6BYUCHMM5M"
-      - "DDNSR53_ROUTE53_RECORDSSET_0_NAME=pistack-remote.jkolios.xyz."
+      - "DDNSR53_ROUTE53_HOSTEDZONEID=${ROUTE53_HOSTED_ZONE_ID}"
+      - "DDNSR53_ROUTE53_RECORDSSET_0_NAME=${DOMAIN}."
       - "DDNSR53_ROUTE53_RECORDSSET_0_TYPE=A"
       - "DDNSR53_ROUTE53_RECORDSSET_0_TTL=300"
-      - "DDNSR53_ROUTE53_RECORDSSET_1_NAME=*.pistack-remote.jkolios.xyz."
+      - "DDNSR53_ROUTE53_RECORDSSET_1_NAME=*.${DOMAIN}."
       - "DDNSR53_ROUTE53_RECORDSSET_1_TYPE=A"
       - "DDNSR53_ROUTE53_RECORDSSET_1_TTL=300"
+      - "DDNSR53_ROUTE53_RECORDSSET_2_NAME=${DOMAIN}."
+      - "DDNSR53_ROUTE53_RECORDSSET_2_TYPE=AAAA"
+      - "DDNSR53_ROUTE53_RECORDSSET_2_TTL=300"
+      - "DDNSR53_ROUTE53_RECORDSSET_3_NAME=*.${DOMAIN}."
+      - "DDNSR53_ROUTE53_RECORDSSET_3_TYPE=AAAA"
+      - "DDNSR53_ROUTE53_RECORDSSET_3_TTL=300"
     restart: always
 
   nzbget:
@@ -231,7 +219,7 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.nzbget.rule=Host(`nzbget.pistack.jkolios.xyz`)"
+      - "traefik.http.routers.nzbget.rule=Host(`nzbget.${DOMAIN}`)"
       - "traefik.http.routers.nzbget.entrypoints=websecure"
       - "traefik.http.routers.nzbget.tls.certresolver=route53"
 
@@ -251,7 +239,7 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.pistack.jkolios.xyz`)"
+      - "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.${DOMAIN}`)"
       - "traefik.http.routers.qbittorrent.entrypoints=websecure"
       - "traefik.http.routers.qbittorrent.tls.certresolver=route53"
       - "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"
@@ -269,7 +257,7 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.sonarr.rule=Host(`sonarr.pistack.jkolios.xyz`)"
+      - "traefik.http.routers.sonarr.rule=Host(`sonarr.${DOMAIN}`)"
       - "traefik.http.routers.sonarr.entrypoints=websecure"
       - "traefik.http.routers.sonarr.tls.certresolver=route53"
 
@@ -288,37 +276,6 @@ services:
     labels:
       - "traefik.enable=false"
 
-  # wireguard:
-  #   image: lscr.io/linuxserver/wireguard:latest
-  #   container_name: wireguard
-  #   cap_add:
-  #     - NET_ADMIN
-  #     - SYS_MODULE
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Europe/Athens
-  #     - SERVERURL=pistack.jkolios.xyz
-  #     - SERVERPORT=51820 #optional
-  #     - PEERS=1 #optional
-  #     - PEERDNS=auto #optional
-  #     - INTERNAL_SUBNET=10.13.13.0 #optional
-  #     - ALLOWEDIPS=0.0.0.0/0 #optional
-  #     - LOG_CONFS=true #optional
-  #   volumes:
-  #     - wireguard_config:/config
-  #     - /lib/modules:/lib/modules
-  #   ports:
-  #     - "51820:51820/udp"
-  #   sysctls:
-  #     - net.ipv4.conf.all.src_valid_mark=1
-  #   restart: unless-stopped
-  #   labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.wireguard.rule=Host(`wireguard.pistack.jkolios.xyz`)"
-  #     - "traefik.http.routers.wireguard.entrypoints=websecure"
-  #     - "traefik.http.routers.wireguard.tls.certresolver=route53"
-
   homepage:
     image: ghcr.io/benphelps/homepage:latest
     container_name: homepage
@@ -329,7 +286,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.homepage.rule=Host(`homepage.pistack.jkolios.xyz`)"
+      - "traefik.http.routers.homepage.rule=Host(`homepage.${DOMAIN}`)"
       - "traefik.http.routers.homepage.entrypoints=websecure"
       - "traefik.http.routers.homepage.tls.certresolver=route53"
 
@@ -384,11 +341,6 @@ volumes:
       type: "nfs"
       o: "addr=192.168.1.111,nolock,soft,rw"
       device: ":/volume1/DockerVolumes/certs"
-  mitmproxy:
-    driver_opts:
-      type: "nfs"
-      o: "addr=192.168.1.111,nolock,soft,rw"
-      device: ":/volume1/DockerVolumes/mitmproxy"
   nzbget_config:
     driver_opts:
       type: "nfs"
@@ -409,11 +361,6 @@ volumes:
       type: "nfs"
       o: "addr=192.168.1.111,nolock,soft,rw"
       device: ":/volume1/DockerVolumes/sonarr_config"
-  wireguard_config:
-    driver_opts:
-      type: "nfs"
-      o: "addr=192.168.1.111,nolock,soft,rw"
-      device: ":/volume1/DockerVolumes/wireguard_config"
   downloads:
     driver_opts:
       type: "nfs"

@@ -1,82 +1,82 @@
 - Piracy:
       - Sonarr:
             icon: sonarr
-            href: https://sonarr.pistack.jkolios.xyz
+            href: https://sonarr.${DOMAIN}
             description: Series management
             server: local-docker
             container: sonarr
             widget:
                 type: sonarr
-                url: https://sonarr.pistack.jkolios.xyz
+                url: https://sonarr.${DOMAIN}
                 key: 1fd835c840144354b711c758679ade32
       - NZBget:
             icon: nzbget
-            href: https://nzbget.pistack.jkolios.xyz
+            href: https://nzbget.${DOMAIN}
             description: Newsgroups downloader
             server: local-docker
             container: nzbget
             widget:
                 type: nzbget
-                url: https://nzbget.pistack.jkolios.xyz
+                url: https://nzbget.${DOMAIN}
                 username: nzbget
                 password: nzbget
       - Qbittorrent:
             icon: qbittorrent
-            href: https://qbittorrent.pistack.jkolios.xyz
+            href: https://qbittorrent.${DOMAIN}
             description: Torrent Client
             server: local-docker
             container: qbittorrent
             widget:
                 type: qbittorrent
-                url: https://qbittorrent.pistack.jkolios.xyz
+                url: https://qbittorrent.${DOMAIN}
                 username: admin
                 password: adminadmin
 
 - Network:
       - Blocky:
             icon: blocky
-            href: https://blocky.pistack.jkolios.xyz
+            href: https://blocky.${DOMAIN}
             description: DNS Server/Cache
             server: local-docker
             container: blocky
       - Wireguard:
             icon: wireguard
-            href: https://wireguard.pistack.jkolios.xyz
+            href: https://wireguard.${DOMAIN}
             description: VPN
             server: local-docker
             container: wireguard
       - Traefik:
             icon: traefik
-            href: https://traefik.pistack.jkolios.xyz/dashboard
+            href: https://traefik.${DOMAIN}/dashboard
             description: Reverse Proxy/Ingress
             server: local-docker
             container: traefik
             widget:
                 type: traefik
-                url: https://traefik.pistack.jkolios.xyz
+                url: https://traefik.${DOMAIN}
 
 - Media:
       - Podgrab:
             icon: podify
-            href: https://podgrab.pistack.jkolios.xyz
+            href: https://podgrab.${DOMAIN}
             description: Podcast Aggregator
             server: local-docker
             container: podgrab
       - calibre-web:
             icon: calibreweb
-            href: https://calibre-web.pistack.jkolios.xyz
+            href: https://calibre-web.${DOMAIN}
             description: Calibre E-book Library UI
             server: local-docker
             container: calibre-web
       - Plex:
             icon: plex-square
-            href: http://pistack.jkolios.xyz:32400
+            href: http://${DOMAIN}:32400
             description: Plex Media Server
             server: local-docker
             container: plex
       - TTRSS:
             icon: tinytinyrss
-            href: https://ttrss.pistack.jkolios.xyz
+            href: https://ttrss.${DOMAIN}
             description: RSS Aggregator
             server: local-docker
             container: ttrss_frontend
@@ -98,7 +98,7 @@
 - Home Automation:
       - Yeelight Controller:
             icon: spotweb
-            href: http://pistack.jkolios.xyz:4000/lights
+            href: http://${DOMAIN}:4000/lights
             description: Smart Light Controller
             server: local-docker
             container: yeelight-controller
