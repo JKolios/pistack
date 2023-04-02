@@ -52,7 +52,7 @@ services:
       - TZ=${TZ} # Optional to synchronize the log timestamp with host
     volumes:
       # config file
-      - ./blocky/config/config.yml:/app/config.yml
+      - ./configs/blocky/config/config.yml:/app/config.yml
     ports:
       - "53:53/tcp"
       - "53:53/udp"
@@ -121,7 +121,7 @@ services:
   app:
     container_name: ttrss_app
     build:
-      context: ./ttrss/app
+      context: ./configs/ttrss/app
     restart: unless-stopped
     env_file:
       - ./configs/ttrss/.env
@@ -133,7 +133,7 @@ services:
   backups:
     container_name: ttrss_backups
     build:
-      context: ./ttrss/app
+      context: ./configs/ttrss/app
     restart: unless-stopped
     env_file:
       - ./configs/ttrss/.env
@@ -147,7 +147,7 @@ services:
   updater:
     container_name: ttrss_updater
     build:
-      context: ./ttrss/app
+      context: ./configs/ttrss/app
     restart: unless-stopped
     env_file:
       - ./configs/configs/ttrss/.env
