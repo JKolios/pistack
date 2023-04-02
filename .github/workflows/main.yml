@@ -39,6 +39,8 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           DOMAIN_EMAIL: ${{ secrets.DOMAIN_EMAIL }}
+          DOMAIN: ${{ secrets.DOMAIN }}
+          ROUTE53_HOSTED_ZONE_ID: ${{ secrets.ROUTE53_HOSTED_ZONE_ID }}
           COMPOSE_HTTP_TIMEOUT: 600
 
 
