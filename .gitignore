@@ -10,8 +10,6 @@ podgrab/data/**
 *.tfvars
 *.lock.hcl
 
-**/.env
-
 .idea/**
 **/.DS_Store
 
