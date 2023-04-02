@@ -28,6 +28,7 @@ jobs:
       
       - name: create config files based on templates
         run: .ci/template.sh
+        working-directory: ${{ env.checkout_path }}
 
       - name: docker-compose validate
         run: docker-compose config -q
