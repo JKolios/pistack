@@ -124,7 +124,7 @@ services:
       context: ./ttrss/app
     restart: unless-stopped
     env_file:
-      - ./ttrss/.env
+      - ./configs/ttrss/.env
     volumes:
       - ttrss_app:/var/www/html
     depends_on:
@@ -136,7 +136,7 @@ services:
       context: ./ttrss/app
     restart: unless-stopped
     env_file:
-      - ./ttrss/.env
+      - ./configs/ttrss/.env
     volumes:
       - ttrss_backups:/backups
       - ttrss_app:/var/www/html
@@ -150,7 +150,7 @@ services:
       context: ./ttrss/app
     restart: unless-stopped
     env_file:
-      - ./configs/ttrss/.env
+      - ./configs/configs/ttrss/.env
     volumes:
       - ttrss_app:/var/www/html
     depends_on:
