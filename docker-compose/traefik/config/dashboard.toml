@@ -2,5 +2,5 @@
   [http.routers]
     [http.routers.traefik]
       entrypoints = ["websecure"]
-      rule = "Host(`traefik.${DOMAIN}`)"
+      rule = "Host(\"traefik.${DOMAIN}\")"
       service = "api@internal"
