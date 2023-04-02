@@ -13,4 +13,3 @@ podgrab/data/**
 .idea/**
 **/.DS_Store
 
-./docker-compose/configs/**
