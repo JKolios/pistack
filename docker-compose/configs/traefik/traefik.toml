@@ -25,7 +25,6 @@ exposedByDefault = false
    watch = true
 
 [certificatesResolvers.route53.acme]
-email = "precursor@gmail.com"
 storage = "/certs/acme.json"
    
 [certificatesResolvers.route53.acme.dnschallenge]
