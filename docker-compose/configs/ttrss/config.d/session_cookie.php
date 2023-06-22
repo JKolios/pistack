@@ -1,0 +1,1 @@
+define('SESSION_COOKIE_LIFETIME', 30 * 86400);
