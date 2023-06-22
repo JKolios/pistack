@@ -8,7 +8,7 @@ address = ":8080"
 address = ":443"
 
 [entryPoints.websecure.http.tls]
-certResolver = "route53"
+certResolver = "cloudflare"
 
 [api]
 dashboard=true
@@ -24,11 +24,10 @@ exposedByDefault = false
    directory = "/etc/traefik/config"
    watch = true
 
-[certificatesResolvers.route53.acme]
-email = "precursor@gmail.com"
+[certificatesResolvers.cloudflare.acme]
 storage = "/certs/acme.json"
    
-[certificatesResolvers.route53.acme.dnschallenge]
-provider="route53"
+[certificatesResolvers.cloudflare.acme.dnschallenge]
+provider="cloudflare"
 delayBeforeCheck=0
 resolvers="1.1.1.1:53"
