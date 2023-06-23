@@ -14,7 +14,7 @@ certResolver = "cloudflare"
 dashboard=true
 
 [log]
-level="DEBUG"
+level="INFO"
 
 [providers.docker]
 endpoint = "unix:///var/run/docker.sock"
