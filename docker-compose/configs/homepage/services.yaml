@@ -1,82 +1,82 @@
 - Piracy:
       - Sonarr:
             icon: sonarr
-            href: https://sonarr.pistack.jkolios.xyz
+            href: https://sonarr.do.main
             description: Series management
             server: local-docker
             container: sonarr
             widget:
                 type: sonarr
-                url: https://sonarr.pistack.jkolios.xyz
+                url: https://sonarr.do.main
                 key: 1fd835c840144354b711c758679ade32
       - NZBget:
             icon: nzbget
-            href: https://nzbget.pistack.jkolios.xyz
+            href: https://nzbget.do.main
             description: Newsgroups downloader
             server: local-docker
             container: nzbget
             widget:
                 type: nzbget
-                url: https://nzbget.pistack.jkolios.xyz
+                url: https://nzbget.do.main
                 username: nzbget
                 password: nzbget
       - Qbittorrent:
             icon: qbittorrent
-            href: https://qbittorrent.pistack.jkolios.xyz
+            href: https://qbittorrent.do.main
             description: Torrent Client
             server: local-docker
             container: qbittorrent
             widget:
                 type: qbittorrent
-                url: https://qbittorrent.pistack.jkolios.xyz
+                url: https://qbittorrent.do.main
                 username: admin
                 password: adminadmin
 
 - Network:
       - Blocky:
             icon: blocky
-            href: https://blocky.pistack.jkolios.xyz
+            href: https://blocky.do.main
             description: DNS Server/Cache
             server: local-docker
             container: blocky
       - Wireguard:
             icon: wireguard
-            href: https://wireguard.pistack.jkolios.xyz
+            href: https://wireguard.do.main
             description: VPN
             server: local-docker
             container: wireguard
       - Traefik:
             icon: traefik
-            href: https://traefik.pistack.jkolios.xyz/dashboard
+            href: https://traefik.do.main/dashboard
             description: Reverse Proxy/Ingress
             server: local-docker
             container: traefik
             widget:
                 type: traefik
-                url: https://traefik.pistack.jkolios.xyz
+                url: https://traefik.do.main
 
 - Media:
       - Podgrab:
             icon: podify
-            href: https://podgrab.pistack.jkolios.xyz
+            href: https://podgrab.do.main
             description: Podcast Aggregator
             server: local-docker
             container: podgrab
       - calibre-web:
             icon: calibreweb
-            href: https://calibre-web.pistack.jkolios.xyz
+            href: https://calibre-web.do.main
             description: Calibre E-book Library UI
             server: local-docker
             container: calibre-web
       - Plex:
             icon: plex-square
-            href: http://pistack.jkolios.xyz:32400
+            href: http://do.main:32400
             description: Plex Media Server
             server: local-docker
             container: plex
       - TTRSS:
             icon: tinytinyrss
-            href: https://ttrss.pistack.jkolios.xyz
+            href: https://ttrss.do.main
             description: RSS Aggregator
             server: local-docker
             container: ttrss_frontend
@@ -84,13 +84,13 @@
 - Monitoring:
   - Prometheus:
       icon: prometheus
-      href: https://prometheus.pistack.jkolios.xyz
+      href: https://prometheus.do.main
       description: Prometheus Time Series DB
       server: local-docker
       container: prometheus
   - Grafana:
       icon: grafana
-      href: https://grafana.pistack.jkolios.xyz
+      href: https://grafana.do.main
       description: Grafana Dashboards
       server: local-docker
       container: grafana
@@ -98,7 +98,7 @@
 - Home Automation:
       - Yeelight Controller:
             icon: spotweb
-            href: http://pistack.jkolios.xyz:4000/lights
+            href: http://do.main:4000/lights
             description: Smart Light Controller
             server: local-docker
             container: yeelight-controller
