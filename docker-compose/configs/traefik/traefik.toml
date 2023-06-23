@@ -26,9 +26,9 @@ exposedByDefault = false
 
 [certificatesResolvers.cloudflare.acme]
 storage = "/certs/acme.json"
+email="foo@bar.com"
    
 [certificatesResolvers.cloudflare.acme.dnschallenge]
 provider="cloudflare"
-email="foo@bar.com"
 delayBeforeCheck=0
 resolvers="1.1.1.1:53"
