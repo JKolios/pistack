@@ -48,7 +48,7 @@ services:
     container_name: blocky
     restart: unless-stopped
     environment:
-      - TZ=${TZ} # Optional to synchronize the log timestamp with host
+      - TZ=${TZ} # Optional to synchronize log timestamps with host
     volumes:
       # config file
       - ./configs/blocky/config/config.yml:/app/config.yml

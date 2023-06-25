@@ -39,12 +39,6 @@
             description: DNS Server/Cache
             server: local-docker
             container: blocky
-      - Wireguard:
-            icon: wireguard
-            href: https://wireguard.do.main
-            description: VPN
-            server: local-docker
-            container: wireguard
       - Traefik:
             icon: traefik
             href: https://traefik.do.main/dashboard
