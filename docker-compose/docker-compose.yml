@@ -263,6 +263,20 @@ services:
       - "traefik.http.routers.homepage.rule=Host(\"homepage.${DOMAIN}\")"
       - "traefik.http.routers.homepage.entrypoints=websecure"
       - "traefik.http.routers.homepage.tls.certresolver=cloudflare"
+  
+  homebridge:
+    image: homebridge/homebridge:latest
+    restart: always
+    network_mode: host
+    volumes:
+      - ./volumes/homebridge:/homebridge
+    logging:
+      driver: json-file
+      options:
+        max-size: "10mb"
+        max-file: "1"
+    labels:
+      - "traefik.enable=false"
 
 volumes:
   podgrab_config:
@@ -340,3 +354,8 @@ volumes:
       type: "nfs"
       o: "addr=192.168.1.111,nolock,soft,rw"
       device: ":/volume1/Storage/downloads"
+  homebridge:
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.1.111,nolock,soft,rw"
+      device: ":/volume1/DockerVolumes/homebridge"
